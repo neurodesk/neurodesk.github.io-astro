@@ -29,6 +29,12 @@
 	color: var(--sl-color-text);
 }
 
+/* Hero: tighten Starlight's default vertical padding. Default caps at 10rem
+   on tall viewports which gives too much empty space around the hero block. */
+.hero {
+	padding-block: clamp(1.5rem, calc(0.5rem + 4vmin), 4rem) !important;
+}
+
 /* Hero title — lighter weight for a more modern feel. */
 .hero h1 {
 	font-weight: 500;
@@ -176,10 +182,6 @@
 	display: block;
 }
 
-:root[data-theme='light'] .feature-video {
-	border: none;
-}
-
 /* Subtle automation chip — used under submission steps etc. */
 .auto-chip {
 	display: inline-flex;
@@ -207,6 +209,84 @@
 
 .sl-markdown-content > h2:first-child {
 	margin-top: 2rem;
+}
+
+/* Landing-page section wrapper. Optional tint adds a soft chapter break. */
+.ld-section {
+	margin: 3rem 0;
+}
+
+.ld-section--tint {
+	background: var(--sl-color-bg-sidebar);
+	padding: 1.75rem;
+	border-radius: 0.75rem;
+}
+
+:root[data-theme='light'] .ld-section--tint {
+	/* Subtle neutral grey on light theme — matches the barely-perceptible
+	   feel of the dark-theme tint, without competing with the video.
+	   Add a visible border to frame the section against the white page bg. */
+	background: #f4f4f5;
+	border: 1px solid var(--sl-color-gray-5);
+}
+
+.ld-section > h2:first-child,
+.ld-section > h2:first-of-type {
+	margin-top: 0;
+}
+
+/* Stat pullquote: emphatic mid-page break with three big numbers. */
+.stat-pullquote {
+	margin: 3rem 0;
+	padding: 2.5rem 1.75rem;
+	background: var(--sl-color-accent-low);
+	border-radius: 0.75rem;
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+}
+
+.stat-pullquote::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(circle at 20% 110%, var(--sl-color-accent) 0%, transparent 45%);
+	opacity: 0.15;
+	pointer-events: none;
+}
+
+.stat-pullquote > * {
+	position: relative;
+}
+
+.stat-pullquote__lead {
+	font-size: 0.95rem;
+	font-weight: 600;
+	color: var(--sl-color-accent-high);
+	margin: 0 0 1.5rem;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+.stat-pullquote__numbers {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 2.5rem 3rem;
+}
+
+.stat-pullquote__stat strong {
+	display: block;
+	font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+	font-weight: 700;
+	color: var(--sl-color-accent);
+	line-height: 1.05;
+	margin-bottom: 0.25rem;
+}
+
+.stat-pullquote__stat span {
+	font-size: 0.9rem;
+	color: var(--sl-color-text);
 }
 
 /* Independent evaluation: testimonial-style callout (not a Starlight Aside). */
@@ -500,29 +580,6 @@
 	flex-wrap: wrap;
 	gap: 0.75rem;
 	justify-content: center;
-}
-
-.final-cta__stats {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap: 2.5rem;
-	margin-top: 2rem;
-	padding-top: 1.75rem;
-	border-top: 1px solid var(--sl-color-gray-5);
-}
-
-.final-cta__stat strong {
-	display: block;
-	font-size: 1.6rem;
-	font-weight: 700;
-	color: var(--sl-color-accent);
-	line-height: 1.1;
-}
-
-.final-cta__stat span {
-	font-size: 0.9rem;
-	color: var(--sl-color-gray-2);
 }
 
 /* Demo page helpers */
