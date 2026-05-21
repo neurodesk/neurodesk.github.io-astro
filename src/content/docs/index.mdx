@@ -1,0 +1,203 @@
+---
+title: Neurodesk
+description: A community-oriented open-source platform for reproducible neuroimaging analysis.
+template: splash
+hero:
+  title: Run your imaging analyses anywhere
+  tagline: Stop wrestling with dependencies, version conflicts, and platform incompatibilities. Neurodesk gives you consistent, reproducible biomedical imaging tools across any system.
+  image:
+    file: ../../assets/neurodesk-icon.svg
+  actions:
+    - text: Try Neurodesk now
+      link: https://neurodesk.org/getting-started/hosted/play/
+      icon: rocket
+      variant: primary
+    - text: Install locally
+      link: https://neurodesk.org/getting-started/local/neurodeskapp/
+      icon: down-caret
+      variant: minimal
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+<div class="validation-badges not-content">
+	<a class="auto-chip" href="https://neurodesk.org/applications/">
+		<span aria-hidden="true">🧠</span>
+		<span><strong>100+</strong> neuroimaging and biomedical imaging tools</span>
+	</a>
+	<a class="auto-chip" href="https://www.nature.com/articles/s41592-023-02145-x" target="_blank" rel="noopener">
+		<span aria-hidden="true">📄</span>
+		<span>Published in <strong>Nature Methods</strong></span>
+	</a>
+	<a class="auto-chip" href="https://aiia.com.au/wp-content/uploads/2025/08/2025-08-29-National-iAwards-Media-Release.docx.pdf" target="_blank" rel="noopener">
+		<span aria-hidden="true">🏆</span>
+		<span><strong>2025 iAwards</strong> — Best Tech Platform</span>
+	</a>
+</div>
+
+<div class="nav-grid not-content">
+	<a class="nav-card" href="https://neurodesk.org/getting-started/">
+		<span class="nav-card__icon" aria-hidden="true">🚀</span>
+		<span class="nav-card__title">One environment</span>
+		<span class="nav-card__desc">Run tools consistently across operating systems.</span>
+	</a>
+	<a class="nav-card" href="https://neurodesk.org/getting-started/neurodesktop/">
+		<span class="nav-card__icon" aria-hidden="true">🖥️</span>
+		<span class="nav-card__title">Choose your interface</span>
+		<span class="nav-card__desc">Supports graphical desktops, command line and computational notebooks.</span>
+	</a>
+	<a class="nav-card" href="https://neurodesk.org/getting-started/neurocontainers/">
+		<span class="nav-card__icon" aria-hidden="true">☁️</span>
+		<span class="nav-card__title">Work in the cloud</span>
+		<span class="nav-card__desc">Deploy anywhere without installation overhead.</span>
+	</a>
+	<a class="nav-card" href="https://neurodesk.org/edu/contribute/intro.html">
+		<span class="nav-card__icon" aria-hidden="true">🤝</span>
+		<span class="nav-card__title">Contribute learning resources</span>
+		<span class="nav-card__desc">Share your knowledge with the community.</span>
+	</a>
+</div>
+
+## See Neurodesk in action
+
+From data to analysis to visualisation — all in one reproducible environment.
+
+<video class="feature-video" autoplay muted loop playsinline poster="/videos/neurodesk.jpeg">
+	<source src="/videos/neurodesk.webm" type="video/webm" />
+	<source src="/videos/neurodesk.mp4" type="video/mp4" />
+</video>
+
+## Neurodesk components
+
+Flexible tools that work together or independently. Neurodesk makes it easy for beginners and experts to use biomedical imaging tools on desktop, HPC, web, and cloud.
+
+<div class="component-grid not-content">
+	<a class="component-card" href="https://neurodesk.org/getting-started/neurodesktop/">
+		<h3>Neurodesktop</h3>
+		<p class="component-card__desc">Complete virtual desktop environment with GUI applications, ready to use in your browser or locally.</p>
+		<ul>
+			<li>100+ pre-installed neuroimaging tools</li>
+			<li>Familiar desktop interface for graphical applications</li>
+			<li>Install Neurodesk once, all tools are ready to use</li>
+		</ul>
+		<div class="component-card__media">
+			<img src="/components/neurodesktop.png" alt="Neurodesktop" />
+		</div>
+	</a>
+
+	<a class="component-card" href="https://neurodesk.org/getting-started/neurocontainers/">
+		<h3>Neurocontainers</h3>
+		<p class="component-card__desc">Individual containerised tools you can use in your own pipelines and workflows.</p>
+		<ul>
+			<li>Transparent, version-controlled builds</li>
+			<li>Use via Docker or Singularity</li>
+			<li>Perfect for HPC and cloud</li>
+		</ul>
+		<div class="component-card__media">
+			<img src="/components/neurocontainer.png" alt="Neurocontainer" />
+		</div>
+	</a>
+
+	<a class="component-card" href="https://neurodesk.org/getting-started/neurocommand/">
+		<h3>Neurocommand</h3>
+		<p class="component-card__desc">Command-line tool manager that fetches and runs containers seamlessly.</p>
+		<ul>
+			<li>Simple module-based interface</li>
+			<li>Integrates with existing workflows</li>
+			<li>Accessible through Neurodesk for command-line workflows</li>
+		</ul>
+		<div class="component-card__media">
+			<div class="fake">
+				<div class="fakeMenu">
+					<div class="fakeButtons fakeClose"></div>
+					<div class="fakeButtons fakeMinimize"></div>
+					<div class="fakeButtons fakeZoom"></div>
+				</div>
+				<div class="fakeScreen">
+					<span class="typewriter type" style={{ '--n': 53 }}>
+						$ pip3 install -r neurodesk/requirements.txt --user<br />
+						$ bash build.sh --cli<br />
+						$ bash containers.sh<br />
+						$ module use $PWD/local/containers/modules
+					</span>
+				</div>
+			</div>
+		</div>
+	</a>
+</div>
+
+## Community
+
+Neurodesk is a community project. Our active community provides transparency and inclusion — we encourage you to engage and contribute.
+
+<div class="community-grid not-content">
+	<a class="community-card" href="https://donations.uq.edu.au/EAINNEUR" target="_blank" rel="noopener">
+		<span class="community-card__icon" aria-hidden="true">💚</span>
+		<span class="community-card__title">Support us</span>
+		<span class="community-card__desc">Help sustain Neurodesk with a donation to support development and infrastructure.</span>
+	</a>
+	<a class="community-card" href="https://neurodesk.org/overview/faq/#what-is-neurodesk">
+		<span class="community-card__icon" aria-hidden="true">❓</span>
+		<span class="community-card__title">FAQ</span>
+		<span class="community-card__desc">Answers to common questions about installing, running, and contributing to Neurodesk.</span>
+	</a>
+	<a class="community-card" href="https://github.com/orgs/neurodesk/discussions" target="_blank" rel="noopener">
+		<span class="community-card__icon" aria-hidden="true">💬</span>
+		<span class="community-card__title">Discussions</span>
+		<span class="community-card__desc">Ask questions, suggest new features or raise any issues you have (GitHub account required).</span>
+	</a>
+	<a class="community-card" href="https://neurodesk.org/developers/contributors">
+		<span class="community-card__icon" aria-hidden="true">👥</span>
+		<span class="community-card__title">Contributors</span>
+		<span class="community-card__desc">Meet the researchers, developers, and community members building Neurodesk.</span>
+	</a>
+	<a class="community-card" href="https://neurodesk.org/overview/contribute">
+		<span class="community-card__icon" aria-hidden="true">🛠️</span>
+		<span class="community-card__title">Contribution guide</span>
+		<span class="community-card__desc">Learn how you can contribute to Neurodesk code and documentation.</span>
+	</a>
+	<a class="community-card" href="https://neurodesk.org/edu" target="_blank" rel="noopener">
+		<span class="community-card__icon" aria-hidden="true">📚</span>
+		<span class="community-card__title">Learning resources</span>
+		<span class="community-card__desc">Tutorials, examples, and educational material for getting the most out of Neurodesk.</span>
+	</a>
+</div>
+
+<figure class="eval-callout not-content">
+	<div class="eval-callout__label">
+		<span aria-hidden="true">✅</span>
+		<span>Independently evaluated</span>
+	</div>
+	<blockquote class="eval-callout__quote">
+		“Neurodesk offers an extensive container repository, with the versatility of a command-line interface for technical users and a GUI that lowers barriers for non-technical users.”
+	</blockquote>
+	<figcaption class="eval-callout__meta">
+		<span>— Imaging Neuroscience (MIT Press), accessibility and usability study</span>
+		<a href="https://direct.mit.edu/imag/article/doi/10.1162/IMAG.a.79/131499" target="_blank" rel="noopener">Read the paper →</a>
+	</figcaption>
+</figure>
+
+<div class="final-cta not-content">
+	<h2>Ready to run Neurodesk anywhere?</h2>
+	<p class="final-cta__tagline">
+		Join researchers worldwide using Neurodesk for transparent, reproducible neuroimaging.
+	</p>
+	<div class="final-cta__actions">
+		<LinkButton href="https://neurodesk.org/getting-started/" icon="rocket">Get started now</LinkButton>
+		<LinkButton href="https://neurodesk.org/overview/faq/#what-is-neurodesk" variant="minimal" icon="external">Learn more</LinkButton>
+	</div>
+	<div class="final-cta__stats">
+		<div class="final-cta__stat">
+			<strong>100+</strong>
+			<span>containerised tools</span>
+		</div>
+		<div class="final-cta__stat">
+			<strong>3,800+</strong>
+			<span>monthly users</span>
+		</div>
+		<div class="final-cta__stat">
+			<strong>100+</strong>
+			<span>countries</span>
+		</div>
+	</div>
+</div>
