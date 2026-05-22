@@ -522,7 +522,7 @@
 .type {
 	animation:
 		typewriter-blink 0.04s forwards steps(1),
-		typewriter-type calc(var(--n) * 0.07s) 0.3s steps(var(--n)) infinite;
+		typewriter-type calc(var(--n) * 0.4s) 0.3s steps(var(--n)) infinite;
 }
 
 @keyframes typewriter-type {
