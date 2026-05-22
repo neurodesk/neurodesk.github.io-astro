@@ -1,0 +1,75 @@
+---
+/**
+ * Friendly "this page hasn't been ported yet" notice for stub pages.
+ * Use during the Hugo → Astro migration to keep landing-page links working
+ * while pointing users at the equivalent live docs.
+ */
+interface Props {
+	liveUrl: string;
+	liveLabel?: string;
+}
+
+const { liveUrl, liveLabel = 'View this section on the live docs' } = Astro.props;
+---
+
+<div class="uc-card not-content">
+	<div class="uc-card__icon" aria-hidden="true">🚧</div>
+	<div class="uc-card__body">
+		<h2 class="uc-card__title">This section is being ported</h2>
+		<p class="uc-card__desc">
+			We're migrating Neurodesk's documentation to a new platform. This page hasn't been ported yet.
+			In the meantime, the live version is available on the existing site.
+		</p>
+		<p class="uc-card__cta">
+			<a class="uc-card__link" href={liveUrl} target="_blank" rel="noopener">
+				{liveLabel} →
+			</a>
+		</p>
+	</div>
+</div>
+
+<style>
+	.uc-card {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 1.25rem;
+		align-items: start;
+		margin: 2rem 0;
+		padding: 1.5rem 1.75rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-left: 4px solid var(--sl-color-accent);
+		border-radius: 0.6rem;
+		background: var(--sl-color-bg-sidebar);
+	}
+
+	.uc-card__icon {
+		font-size: 2rem;
+		line-height: 1;
+		padding-top: 0.2rem;
+	}
+
+	.uc-card__title {
+		margin: 0 0 0.5rem;
+		font-size: 1.25rem;
+		line-height: 1.3;
+	}
+
+	.uc-card__desc {
+		margin: 0 0 0.85rem;
+		color: var(--sl-color-text-accent);
+	}
+
+	.uc-card__cta {
+		margin: 0;
+	}
+
+	.uc-card__link {
+		font-weight: 600;
+		color: var(--sl-color-accent);
+		text-decoration: none;
+	}
+
+	.uc-card__link:hover {
+		text-decoration: underline;
+	}
+</style>
