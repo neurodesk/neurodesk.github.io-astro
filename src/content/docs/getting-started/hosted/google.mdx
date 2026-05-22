@@ -1,0 +1,96 @@
+---
+title: Google Colab and Cloud Shell
+description: Neurodesk Singularity containers for Google Colab.
+sidebar:
+  label: Google
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs syncKey="google-env">
+<TabItem label="Colab">
+
+Open a notebook in Google Colab and run the following commands to set up the Neurodesk environment:
+
+```python
+import os
+os.environ["LD_PRELOAD"] = "";
+os.environ["APPTAINER_BINDPATH"] = "/content"
+os.environ["MPLCONFIGDIR"] = "/content/matplotlib-mpldir"
+os.environ["LMOD_CMD"] = "/usr/share/lmod/lmod/libexec/lmod"
+
+!curl -J -O https://raw.githubusercontent.com/neurodesk/neurocommand/main/googlecolab_setup.sh
+!chmod +x googlecolab_setup.sh
+!./googlecolab_setup.sh
+
+os.environ["MODULEPATH"] = ':'.join(map(str, list(map(lambda x: os.path.join(os.path.abspath('/cvmfs/neurodesk.ardc.edu.au/neurodesk-modules/'), x),os.listdir('/cvmfs/neurodesk.ardc.edu.au/neurodesk-modules/')))))
+```
+
+Once this setup is completed, you can list the available Neurodesk applications like this:
+
+```python
+import lmod
+await lmod.avail()
+```
+
+and use applications like this:
+
+```python
+await lmod.load('fsl/6.0.4')
+!bet
+```
+
+This notebook demonstrates how to use all Neurodesk applications in Google Colab: [colab.research.google.com/drive/1g5cnZxj1llRaHmOs4xSglqsXnFkQYuol](https://colab.research.google.com/drive/1g5cnZxj1llRaHmOs4xSglqsXnFkQYuol?usp=sharing).
+
+![Neurodesk applications running in Google Colab](https://user-images.githubusercontent.com/4021595/216230682-5f12f5d9-32fe-4174-9994-b257d26cfc06.png)
+
+This is a Google Colab notebook that shows how to integrate with Google Drive and contains an example for running fMRIprep in Google Colab: [colab.research.google.com/drive/11wVBkjNvrzo2TkUAILtWnPumAeFAfqkl](https://colab.research.google.com/drive/11wVBkjNvrzo2TkUAILtWnPumAeFAfqkl?usp=sharing).
+
+More examples can be found [in our example library](https://neurodesk.org/edu).
+
+</TabItem>
+
+<TabItem label="Cloud Shell">
+
+This also works in a Google Cloud Shell, for example for an interactive tutorial via `cloudshell launch-tutorial`.
+
+First, run this:
+
+```bash
+curl -J -O https://raw.githubusercontent.com/neurodesk/neurocommand/main/googlecloudshell_setup.sh
+chmod +x googlecloudshell_setup.sh
+./googlecloudshell_setup.sh
+```
+
+Then use a `tutorial.md` like:
+
+````markdown
+# My first fsl tutorial in Cloud Shell
+
+## Step 1: Say Hello
+Run the following command to print a message:
+
+```bash
+module use /cvmfs/neurodesk.ardc.edu.au/neurodesk-modules/*
+ml fsl
+bet
+```
+````
+
+The tutorial can be started via:
+
+```bash
+cloudshell launch-tutorial tutorial.md
+```
+
+Or via a URL:
+
+```text
+https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=REPO_URL&cloudshell_tutorial=path/to/tutorial.md
+```
+
+where `cloudshell_git_repo` is the URL of the Git repository to clone and `cloudshell_tutorial` is the relative path to the markdown file inside that repo.
+
+</TabItem>
+</Tabs>

@@ -1,0 +1,66 @@
+---
+title: Hosted
+description: Quick access to Neurodesk in the cloud or on HPC systems.
+sidebar:
+  label: Overview
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+Neurodesk offers several hosted options to suit different needs and computing environments. Whether you're looking for a quick start or need high-performance computing capabilities, there's a solution for you.
+
+## Available hosted options
+
+<CardGrid>
+	<LinkCard
+		title="Neurodesk Play"
+		description="Free hosted Neurodesk for evaluation, workshops, and light analysis. No installation required."
+		href="/getting-started/hosted/play/"
+	/>
+	<LinkCard
+		title="GitHub Codespaces"
+		description="Start Neurodesk inside any GitHub Codespace."
+		href="/getting-started/hosted/github/"
+	/>
+	<LinkCard
+		title="Google Colab and Cloud Shell"
+		description="Run Neurodesk containers from a Colab notebook or Google Cloud Shell."
+		href="/getting-started/hosted/google/"
+	/>
+	<LinkCard
+		title="Neurodesk Webapps"
+		description="Fast browser-based image processing. All processing runs locally in the browser."
+		href="https://neurodesk.org/getting-started/hosted/webapps/"
+	/>
+</CardGrid>
+
+## Neurodesk on HPC
+
+Best for large-scale analyses and research projects. Available on many institutional HPC systems with high-performance computing capabilities, integrated with existing HPC infrastructure. Contact your local HPC support to check availability.
+
+We have documented installations at several institutions:
+
+- **University of Queensland** — [Bunya HPC](https://neurodesk.org/getting-started/installations/bunya/) with full integration into UQ's research computing environment.
+- **University of Michigan** — Great Lakes HPC, [installation guide and usage instructions](https://neurodesk.org/getting-started/neurocommand/linux-and-hpc/#greatlakes---university-of-michigan).
+- **Other institutions** — Many HPCs support Neurodesk through Singularity/Apptainer containers. Check our [HPC documentation](https://neurodesk.org/getting-started/neurocommand/linux-and-hpc/) for general setup instructions, and work with your HPC administrators to enable Neurodesk support.
+
+## Choosing the right option
+
+Consider these factors when selecting a hosted solution:
+
+1. **Resource requirements**: data processing needs, storage requirements, computing power needed.
+2. **Access type**: browser-based access, SSH or command-line access, integration with existing workflows.
+3. **Cost considerations**: free options (Neurodesk Play), institutional resources (HPC), cloud hosting costs.
+
+## Getting support
+
+Need help deciding which option is best for you?
+
+- Check our [FAQ section](https://neurodesk.org/overview/faq/).
+- Join our [discussion forum](https://github.com/orgs/neurodesk/discussions).
+- Contact your institutional IT support for HPC deployments.
+
+## Security and data privacy
+
+All hosted options prioritise secure data handling, user authentication, resource isolation, and compliance with institutional policies. Choose the option that best aligns with your institutional requirements and data governance policies.

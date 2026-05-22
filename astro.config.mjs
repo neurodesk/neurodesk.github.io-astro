@@ -31,12 +31,18 @@ export default defineConfig({
 			},
 			sidebar: [
 				{
-					label: 'Guides',
-					items: [{ autogenerate: { directory: 'guides' } }],
-				},
-				{
-					label: 'Reference',
-					items: [{ autogenerate: { directory: 'reference' } }],
+					label: 'Getting started',
+					items: [
+						{ label: 'Overview', link: '/getting-started/' },
+						{
+							label: 'Local',
+							items: [{ autogenerate: { directory: 'getting-started/local' } }],
+						},
+						{
+							label: 'Hosted',
+							items: [{ autogenerate: { directory: 'getting-started/hosted' } }],
+						},
+					],
 				},
 			],
 			customCss: ['./src/styles/custom.css'],

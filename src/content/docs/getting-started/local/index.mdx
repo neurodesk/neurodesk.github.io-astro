@@ -1,0 +1,34 @@
+---
+title: Local
+description: Run Neurodesktop on your own machine for a simple interface and offline access.
+sidebar:
+  label: Overview
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+Run Neurodesktop on your own machine. Local installs are best for serious workloads, offline analysis, and full control over data and compute resources.
+
+<CardGrid>
+	<LinkCard
+		title="Neurodesk App"
+		description="Cross-platform desktop installer for Windows, macOS, and Linux. Recommended starting point."
+		href="/getting-started/local/neurodeskapp/"
+	/>
+	<LinkCard
+		title="Neurodesktop directly"
+		description="Run the Neurodesktop Docker container without the desktop app."
+		href="https://neurodesk.org/getting-started/neurodesktop/"
+	/>
+	<LinkCard
+		title="Run on HPC"
+		description="Pre-built instructions for shared computing clusters."
+		href="https://neurodesk.org/getting-started/installations/"
+	/>
+	<LinkCard
+		title="Run individual containers"
+		description="Use single tools with Docker, Podman, or Singularity."
+		href="https://neurodesk.org/getting-started/neurocontainers/"
+	/>
+</CardGrid>

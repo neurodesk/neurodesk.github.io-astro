@@ -14,6 +14,14 @@
 	--sl-color-accent-high: #d3e7b6;
 }
 
+/* Content images: centred with breathing room. Applies to plain <img>, markdown ![]() and HTML <img>. */
+.sl-markdown-content img {
+	display: block;
+	margin: 1.5rem auto;
+	max-width: 100%;
+	height: auto;
+}
+
 :root[data-theme='light'] {
 	--sl-color-accent-low: #e6f1d6;
 	--sl-color-accent: #4f7b38;
@@ -507,6 +515,30 @@
 	min-height: 5.5rem;
 }
 
+.fakeScreen--scroll {
+	padding: 0.9rem 1rem 1rem;
+	overflow-x: auto;
+	min-height: 0;
+}
+
+.fake-log {
+	margin: 0;
+	color: #d3e7b6;
+	font-family: inherit;
+	font-size: 0.78rem;
+	line-height: 1.55;
+	white-space: pre-wrap;
+	word-break: break-all;
+	background: transparent;
+}
+
+.fake-token {
+	background: rgba(255, 215, 64, 0.18);
+	color: #ffe17a;
+	padding: 0 0.15rem;
+	border-radius: 0.2rem;
+}
+
 .typewriter {
 	color: transparent;
 	background:
@@ -588,4 +620,112 @@
 	border-radius: 0.5rem;
 	padding: 1.25rem;
 	margin: 0.75rem 0 1.5rem;
+}
+
+/* Neurodesk App page hero image: right-floated on wide viewports, blocks on mobile. */
+.neurodeskapp-hero {
+	float: right;
+	margin: 0 0 1rem 1.5rem;
+	max-width: 100%;
+	height: auto;
+}
+
+@media (max-width: 60rem) {
+	.neurodeskapp-hero {
+		float: none;
+		margin: 0 0 1.25rem;
+	}
+}
+
+/* Play page server-latency widget. */
+.play-latency {
+	margin: 1.5rem 0;
+	padding: 1.5rem;
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.6rem;
+	background: var(--sl-color-bg-sidebar);
+	text-align: center;
+}
+
+.play-latency .ping-container {
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	flex-wrap: wrap;
+	margin-bottom: 1.25rem;
+}
+
+.play-latency .ping-card {
+	width: 11rem;
+	padding: 1rem;
+	background: var(--sl-color-bg);
+	border: 2px solid var(--sl-color-gray-5);
+	border-radius: 0.5rem;
+	text-decoration: none;
+	color: var(--sl-color-text);
+	display: block;
+	cursor: pointer;
+	transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.play-latency .ping-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+	border-color: var(--sl-color-accent);
+}
+
+.play-latency .ping-winner {
+	border-color: var(--sl-color-accent);
+	background: var(--sl-color-accent-low);
+}
+
+.play-latency .ping-name {
+	display: block;
+	font-weight: 700;
+	font-size: 1.05rem;
+	margin-bottom: 0.35rem;
+	color: var(--sl-color-accent);
+}
+
+.play-latency .ping-time {
+	font-size: 1.3rem;
+	font-weight: 700;
+	margin: 0.5rem 0 0.25rem;
+}
+
+.play-latency .ping-req {
+	font-size: 0.75rem;
+	color: var(--sl-color-text-accent);
+	background: var(--sl-color-gray-6);
+	padding: 0.15rem 0.55rem;
+	border-radius: 999px;
+	display: inline-block;
+	border: 1px solid var(--sl-color-gray-5);
+}
+
+.play-latency .ping-status {
+	display: block;
+	font-size: 0.85rem;
+	color: var(--sl-color-text-accent);
+	margin-top: 0.35rem;
+}
+
+.play-latency .ping-btn {
+	padding: 0.5rem 1rem;
+	background: var(--sl-color-bg);
+	color: var(--sl-color-text);
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.4rem;
+	cursor: pointer;
+	font-size: 0.9rem;
+	transition: background 0.15s ease;
+}
+
+.play-latency .ping-btn:hover {
+	background: var(--sl-color-gray-6);
+}
+
+.play-latency .ping-btn:disabled {
+	opacity: 0.6;
+	cursor: progress;
 }

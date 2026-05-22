@@ -1,0 +1,94 @@
+---
+title: Get started with Neurodesk
+description: Pick the way you want to run Neurodesk, then follow the linked guide.
+sidebar:
+  label: Overview
+  order: 0
+---
+
+import { Card, CardGrid, Code, LinkCard } from '@astrojs/starlight/components';
+import YouTube from '../../../components/YouTube.astro';
+import { jupyterNeurodeskVersion } from '../../../config/neurodesktop';
+
+export const dockerRunCommand = `sudo docker run \\
+  --shm-size=1gb -it --privileged --user=root --name neurodesktop \\
+  -v ~/neurodesktop-storage:/neurodesktop-storage \\
+  --add-host=host.docker.internal:host-gateway \\
+  -e OLLAMA_HOST="http://host.docker.internal:11434" \\
+  -e NB_UID="$(id -u)" -e NB_GID="$(id -g)" \\
+  -p 8888:8888 \\
+  -e NEURODESKTOP_VERSION=${jupyterNeurodeskVersion} \\
+  ghcr.io/neurodesk/neurodesktop/neurodesktop:${jupyterNeurodeskVersion}`;
+
+Choose how you want to run Neurodesk. Each option below links to setup instructions for that platform.
+
+## Run in the cloud
+
+No installation. Sign in and start working in your browser.
+
+<CardGrid>
+	<LinkCard
+		title="Neurodesk Play"
+		description="Free hosted Neurodesk for evaluation and lightweight workloads."
+		href="/getting-started/hosted/play/"
+	/>
+	<LinkCard
+		title="Other hosting options"
+		description="GitHub Codespaces, Google Cloud Run, and managed web apps."
+		href="https://neurodesk.org/getting-started/hosted/"
+	/>
+</CardGrid>
+
+## Install locally
+
+Run Neurodesktop on your own machine. Best for serious workloads.
+
+<CardGrid>
+	<LinkCard
+		title="Neurodesk App"
+		description="Cross-platform desktop installer. Recommended starting point."
+		href="/getting-started/local/neurodeskapp/"
+	/>
+	<LinkCard
+		title="Run on HPC"
+		description="Pre-built instructions for shared computing clusters."
+		href="https://neurodesk.org/getting-started/installations/"
+	/>
+</CardGrid>
+
+## Use individual tools
+
+Skip the full desktop and use just the containers you need.
+
+<CardGrid>
+	<LinkCard
+		title="Neurocontainers"
+		description="Run tools individually with Docker or Singularity."
+		href="https://neurodesk.org/getting-started/neurocontainers/"
+	/>
+	<LinkCard
+		title="Neurocommand"
+		description="Command-line tool manager for HPC and Linux workflows."
+		href="https://neurodesk.org/getting-started/neurocommand/"
+	/>
+</CardGrid>
+
+## Installation examples
+
+We show a couple of specific worked examples on [Installations](https://neurodesk.org/getting-started/installations/) for systems including Bunya, Sherlock, Nectar, Great Lakes, and Ubuntu 24.04.
+
+## Releases
+
+Note the release date of the Neurodesktop container image during installation. It appears at the end of the image tag in the `docker run` command:
+
+<Code code={dockerRunCommand} lang="bash" mark={jupyterNeurodeskVersion} />
+
+The current stable release is **{jupyterNeurodeskVersion}**. We regularly update Neurodesktop for performance and software updates. Check the [release history](https://neurodesk.org/overview/release-history) for past releases. To upgrade your container, replace the release number with your desired version. For replicable analyses, share the stable release number you used so others can recreate your environment.
+
+## Video tutorial
+
+A 14-minute walkthrough on getting started:
+
+<YouTube id="2ATgTOsiGdY" title="Neurodesk: Getting started" />
+
+You can also view the [Neurodesk overview slideshow](https://osf.io/f2n7a) (or the [PDF version](https://osf.io/ca8rw)) with interactive navigation.
