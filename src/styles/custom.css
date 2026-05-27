@@ -23,7 +23,7 @@
 }
 
 /* FAQ collapsibles: native <details>/<summary> with Starlight-themed chrome. */
-.faq-item {
+:is(.faq-item, .release-item) {
 	border: 1px solid var(--sl-color-gray-5);
 	border-radius: 0.5rem;
 	margin: 0.5rem 0;
@@ -32,11 +32,11 @@
 	transition: border-color 0.15s ease;
 }
 
-.faq-item[open] {
+:is(.faq-item, .release-item)[open] {
 	border-color: var(--sl-color-accent);
 }
 
-.faq-item > summary {
+:is(.faq-item, .release-item) > summary {
 	cursor: pointer;
 	padding: 0.85rem 1rem;
 	font-weight: 600;
@@ -48,14 +48,14 @@
 	transition: background 0.15s ease;
 }
 
-.faq-item > summary:hover {
+:is(.faq-item, .release-item) > summary:hover {
 	background: var(--sl-color-gray-6);
 }
 
-.faq-item > summary::-webkit-details-marker { display: none; }
-.faq-item > summary::marker { content: ''; }
+:is(.faq-item, .release-item) > summary::-webkit-details-marker { display: none; }
+:is(.faq-item, .release-item) > summary::marker { content: ''; }
 
-.faq-item > summary::before {
+:is(.faq-item, .release-item) > summary::before {
 	content: '';
 	width: 0.5rem;
 	height: 0.5rem;
@@ -66,20 +66,44 @@
 	flex-shrink: 0;
 }
 
-.faq-item[open] > summary::before {
+:is(.faq-item, .release-item)[open] > summary::before {
 	transform: rotate(45deg);
 }
 
-.faq-item > *:not(summary) {
+:is(.faq-item, .release-item) > *:not(summary) {
 	padding-inline: 1rem;
 }
 
-.faq-item > *:not(summary):first-of-type {
+:is(.faq-item, .release-item) > *:not(summary):first-of-type {
 	margin-top: 0;
 }
 
-.faq-item > *:last-child {
+:is(.faq-item, .release-item) > *:last-child {
 	padding-bottom: 1rem;
+}
+
+/* Expand/collapse-all toolbar for <details> groups (FAQ, release-history) */
+.collapse-toolbar {
+	display: flex;
+	gap: 0.5rem;
+	margin: 1rem 0 1.25rem;
+}
+
+.collapse-toolbar__btn {
+	font: inherit;
+	font-size: 0.85rem;
+	padding: 0.35rem 0.85rem;
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.4rem;
+	background: var(--sl-color-bg-sidebar);
+	color: var(--sl-color-text);
+	cursor: pointer;
+	transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.collapse-toolbar__btn:hover {
+	border-color: var(--sl-color-accent);
+	background: var(--sl-color-gray-6);
 }
 
 /* Partners grid: consistent logo tiles for funder/cloud/infrastructure callouts. */
