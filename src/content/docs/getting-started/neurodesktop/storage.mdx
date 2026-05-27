@@ -1,0 +1,224 @@
+---
+title: Data Storage
+description: Understanding and managing data storage in Neurodesk.
+sidebar:
+  order: 6
+---
+
+import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
+import { jupyterNeurodeskVersion } from '../../../../config/neurodesktop';
+
+export const dockerRunExtraMount = `docker run --shm-size=1gb -it --privileged --user=root --name neurodesktop -v C:/neurodesktop-storage:/neurodesktop-storage -v D:/moredata:/data -p 8888:8888 -e NEURODESKTOP_VERSION=${jupyterNeurodeskVersion} vnmd/neurodesktop:${jupyterNeurodeskVersion}`;
+
+## Storage overview
+
+How your data is stored in Neurodesk depends on where you are running it:
+
+- **Local (Neurodesk App on your own machine):** Storage is directly linked to your host computer through the `/neurodesktop-storage` directory. Your data persists for as long as you keep it: nothing is automatically deleted. The amount of available space depends on your local disk setup.
+
+- **Play (Neurodesk App cloud-hosted):** Each user is allocated a fixed amount of storage space. You can check how much of your allocation you are using from within the Play environment. Be aware that data on Play is **deleted after 30 days of inactivity**, so make sure to back up any important files using the cloud storage or data transfer methods described below.
+
+- **HPC (high-performance computing):** Storage depends entirely on your institution and how Neurodesk has been set up by your system administrators. Typically, Neurodesk will be configured to bind-mount your institution's existing storage infrastructure (e.g. scratch, group, or project directories).
+
+For all environments, we recommend keeping a copy of important data in an external location. The sections below describe several methods for transferring data in and out of Neurodesk.
+
+## Transferring files
+
+### Drag and drop
+
+<Tabs>
+<TabItem label="Desktop">
+
+**Uploading files**
+
+You can drag-and-drop files into the browser window to get files into the Neurodesktop desktop. This will then start a file upload:
+
+![Neurodesktop desktop showing files being uploaded via drag-and-drop, with the File Transfers panel visible in the bottom-right corner](/docs/getting-started/neurodesktop/datastorage/drag-drop.png)
+
+**Downloading files**
+
+To download files from the desktop you will need to open the Guacamole settings by pressing <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd> (<kbd>Control</kbd>+<kbd>Command</kbd>+<kbd>Shift</kbd> on Mac). This will open a menu on the side:
+
+![Guacamole side menu opened with CTRL-ALT-SHIFT, showing connection settings and the Shared Drive option](/docs/getting-started/neurodesktop/datastorage/guacamole-settings.png)
+
+where you can click on "Shared Drive":
+
+![Guacamole Shared Drive panel listing files available for download](/docs/getting-started/neurodesktop/datastorage/guacamole-upload.png)
+
+A click (or double click on Mac) on the file will start the download.
+
+You can browse into folders in the shared drive by clicking (double clicking on Mac) on them. To get back to the base of the shared drive, press on the drive icon in the top left of the side menu (just below the "Shared Drive" title).
+
+To close the side menu, press <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd> once more (<kbd>Control</kbd>+<kbd>Command</kbd>+<kbd>Shift</kbd> on Mac).
+
+Note that it is only possible to upload or download one file at a time through this interface. If you have multiple files in a directory we recommend zipping the directory and then transferring one zip archive:
+
+```bash
+zip files.zip files/
+```
+
+</TabItem>
+<TabItem label="JupyterLab">
+
+**Uploading files**
+
+You can drag-and-drop files directly into the JupyterLab file browser panel on the left side. Alternatively, click the upload button (upward arrow icon) at the top of the file browser to select files from your computer.
+
+![JupyterLab interface with an arrow highlighting the upload button in the file browser toolbar](/docs/getting-started/neurodesktop/datastorage/jupyter-upload.png)
+
+**Downloading files**
+
+To download a file, right-click on it in the JupyterLab file browser and select "Download".
+
+![JupyterLab file browser showing the right-click context menu with the Download option](/docs/getting-started/neurodesktop/datastorage/jupyter-download.png)
+
+</TabItem>
+</Tabs>
+
+### Local storage
+
+When running Neurodesktop locally, there are two storage locations to be aware of:
+
+- **Home directory** (`/home/jovyan`): This is the Linux filesystem inside the Docker container. Files saved here will persist across container restarts (thanks to a Docker volume), but will be lost if you remove the container or its volumes. Think of this as your working space, not your safe storage.
+
+- **Neurodesktop storage** (`/neurodesktop-storage`): This is a direct link to a folder on your host computer (`C:/neurodesktop-storage` on Windows, `~/neurodesktop-storage` on Mac/Linux). Files saved here live on your actual filesystem, outside of Docker. They will persist regardless of what happens to the container.
+
+:::tip[Important]
+Always save data you want to keep to `/neurodesktop-storage` (the "Storage" folder on the desktop). Files saved elsewhere inside Neurodesktop may be lost when updating or recreating the container.
+:::
+
+#### Mounting external storage on your host computer
+
+The `-v C:/neurodesktop-storage:/neurodesktop-storage` part of the docker command links the directory `neurodesktop-storage` on the C drive of your Windows computer to `/neurodesktop-storage` inside the desktop environment. Everything you store in there will be available inside the desktop and on the host computer.
+
+You can also mount additional directories by adding another `-v` parameter set (e.g. `-v D:/moredata:/data`), which will mount the directory `moredata` from your D drive to `/data` inside Neurodesktop.
+
+:::note
+The mountpoint inside Neurodesktop needs to be named `/data`, otherwise the applications will not see the files without modifying the `SINGULARITY_BINDPATH` variable in your `.bashrc`.
+:::
+
+If you are using the Neurodesk App, you can set an additional storage location through the [settings](/getting-started/local/neurodeskapp/#add-a-custom-data-directory).
+
+If you are starting Neurodesk through the command line, here is an example for Windows adding another storage directory:
+
+<Code code={dockerRunExtraMount} lang="cmd" mark={jupyterNeurodeskVersion} />
+
+:::note[Note for Windows users]
+Connecting network shares from Windows to Neurodesk can cause problems, so be careful when attempting this. Also, be aware that processing large amounts of files stored on a Windows filesystem inside Neurodesk will come with a performance penalty due to the filesystem translation in the background. One option to get around these problems is to directly access your storage infrastructure inside Neurodesk.
+:::
+
+### Cloud storage
+
+Another way to get your data into Neurodesktop is to use a cloud storage provider like Dropbox, OneDrive, OwnCloud, Nextcloud or more general tools like Rclone or davfs2. Another good option is to use Globus for large amounts of data.
+
+#### Nextcloud and OwnCloud desktop clients
+
+Under the menu item "Accessories" you can find "Nextcloud" and "ownCloud" desktop sync clients that you can configure with your cloud service accounts.
+
+#### Mounting WebDAV storage using davfs2
+
+Another option is to directly mount WebDAV storage. Here is an example of how to mount OwnCloud storage into Neurodesktop:
+
+```bash
+sudo mount -t davfs https://yourOwnCloudInstance.com/plus/remote.php/webdav/ /data/
+```
+
+It then asks you for a username and password, which you can generate in the settings: `yourOwnCloudInstance/plus/settings/personal?sectionid=security`.
+
+#### Rclone
+
+Rclone is a command-line tool that enables interaction with various cloud services. Here is an example of how to set up Rclone with an OwnCloud account:
+
+- Start the configuration in a terminal window: `rclone config`
+- Create a new remote: `n`
+- Provide a name for the remote: `OwnCloud`
+- For the "Storage" option choose: `webdav`
+- As "url" set: `https://yourOwnCloudInstance.com/plus/remote.php/webdav/`
+- As "vendor" set OwnCloud: `2`
+- Set your OwnCloud username after generating an access token at `yourOwnCloudInstance/plus/settings/personal?sectionid=security`
+- Choose to type in your own password: `y`
+- Enter the password / token from the OwnCloud App passwords page and confirm it again
+- Leave blank the bearer_token: press <kbd>Enter</kbd>
+- No advanced config necessary: press <kbd>Enter</kbd>
+- Accept the configuration: press <kbd>Enter</kbd>
+- Quit the config: `q`
+- Download data: `rclone copy --progress --transfers 8 OwnCloud:/raw-data-for-science-paper .`
+- Upload data to OwnCloud: `rclone copy --progress --transfers 8 . OwnCloud:/data-processed`
+
+#### Globus
+
+We also provide the Globus client, so you can transfer large amounts of data between Globus endpoints and Neurodesktop. You can configure it by running the following commands in the Neurodesktop environment:
+
+```bash
+ml globus
+# First run the setup:
+globusconnectpersonal -setup
+
+#Follow the instructions in the terminal: 
+#1) copy the URL into a browser and generate the Native App Authorization Code
+#2) then copy this code and paste it in the terminal
+#3) then name the endpoint, e.g. Neurodesktop
+
+# Then start the GUI:
+globusconnectpersonal -gui
+
+# If the connection fails, reset the permissions on the key file:
+chmod 600 /home/jovyan/.globusonline/lta/relay-anonymous-key.pem
+
+# If the connection still fails, start the client like this to get more information
+globusconnectpersonal -debug
+```
+
+Then add the directories you want to share with Globus by opening File → Preferences:
+
+![Globus Connect Personal menu showing File then Preferences option](https://github.com/neurodesk/neurodesk.github.io/assets/4021595/c6c7b912-a113-43df-b6d9-233fb92c4ea0)
+
+and then add the paths required and hit Save:
+
+![Globus Connect Personal Preferences dialog with accessible directories listed and Save button](https://github.com/neurodesk/neurodesk.github.io/assets/4021595/daa8c036-4548-4da2-98f1-8ac39b7e8317)
+
+Then you can go to the [Globus file manager](https://app.globus.org/file-manager) and your Neurodesktop instance will be an endpoint for Globus. You can change the path to any location you specified in the Preferences:
+
+![Globus file manager web interface showing the Neurodesktop endpoint and its file listing](https://github.com/neurodesk/neurodesk.github.io/assets/4021595/35dcfc7a-2975-4fcc-8c49-dbe9c43b6433)
+
+#### Mount volume using SSHFS
+
+It is theoretically possible to mount an SSH target inside Neurodesktop, but it's not a very reliable way of mounting storage:
+
+```bash
+sudo mkdir /mnt/data_mount
+sudo chmod a+rwx /mnt/data_mount
+sshfs -o allow_root USER@TARGET_HOST:TARGET_PATH /mnt/data_mount
+```
+
+A better option is to use `scp` and copy data from an SSH endpoint:
+
+```bash
+scp /neurodesk/myfile user@remoteserver:/data/
+```
+
+An alternative is to mount the SSHFS target into a parent directory on your local machine or VM and then use the `-v` option in the docker run command to bind the parent directory of the SSHFS mount.
+
+:::tip[Important]
+The SSHFS mount *must* be a subdirectory inside a parent directory that is then bound to the Docker container. If you directly bind the mounted directory itself, your Neurodesktop container will lose access when the SSHFS mount disconnects and will not recover without a container restart.
+:::
+
+For example, on a local Linux machine or VM:
+
+```bash
+sshfs -o allow_root USER@TARGET_HOST:TARGET_PATH/MyData SOURCE_PATH/SSHFS_Mounts/MyData
+```
+
+Then add the following line to the docker run command when starting Neurodesktop (note the `rshared` flag):
+
+```bash
+-v /SSHFS_Mounts:/data:rshared \
+```
+
+:::tip
+If you use key pair authentication instead of a password for your SSHFS mount, you can use the reconnect flag to reconnect automatically if the connection drops:
+
+```bash
+sshfs -o IdentityFile=~/.ssh/id_rsa,allow_root,ServerAliveInterval=5,ServerAliveCountMax=3 USER@TARGET_HOST:TARGET_PATH/MyData SOURCE_PATH/SSHFS_Mounts/MyData
+```
+:::

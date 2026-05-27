@@ -1,0 +1,48 @@
+---
+title: Visual Studio Code
+description: Connect your VS Code environment to Neurodesktop.
+sidebar:
+  order: 4
+---
+
+The following guide is for connecting to Neurodesktop using a VS Code installation running on your host machine.
+
+:::note
+Please see additional instructions below if Neurodesktop is running remotely (i.e. cloud, HPC, VM).
+:::
+
+## Pre-requisites
+
+Visual Studio Code ([https://code.visualstudio.com](https://code.visualstudio.com)) installed on your host. Standalone version should work fine.
+
+Install the following VS Code extension:
+
+- **Dev Containers** (`ms-vscode-remote.remote-containers`) from Microsoft
+
+## Connecting to Neurodesktop
+
+Start Neurodesk through the [Neurodesk App](/getting-started/local/neurodeskapp/) or through a docker command.
+
+Open VS Code and open the Remote Explorer. Then attach to the running Neurodesktop container.
+
+:::note
+This may take about a minute if it is the first time you are connecting, as VS Code has to install the VS Code server onto the container. Repeat connections should be faster.
+:::
+
+### First time connection
+
+:::caution
+The first time connection will default to using the Neurodesktop `root` user. We want the default connection to be as the normal user to avoid permission issues.
+:::
+
+To check which user is being used, open the terminal in the Neurodesktop VS Code instance and check if the user is `user` or `root`.
+
+You can change to the correct user by running `su jovyan`.
+
+## Useful additions
+
+Plugins to view neuroimaging data inside VS Code:
+
+![niivue-vscode](/docs/getting-started/neurocommand/niivue_vscode.png)
+
+![niivue extension screenshot](https://user-images.githubusercontent.com/4021595/163663250-4e8894c6-ea26-4224-b619-87f5485880c1.png)

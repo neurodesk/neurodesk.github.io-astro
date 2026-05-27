@@ -1,0 +1,218 @@
+---
+title: Linux and HPC
+description: Install Neurocommand on Linux or HPC.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+## Ways of using Neurocommand in Linux and HPC
+
+1. You can use the module files for Neurocontainers directly via CVMFS: [/getting-started/neurocontainers/cvmfs/](/getting-started/neurocontainers/cvmfs/)
+2. Or you can install Neurocommand as described here.
+
+## Requirements
+
+- Python 3.6+: [https://www.anaconda.com/docs/getting-started/miniconda/install#linux-terminal-installer](https://www.anaconda.com/docs/getting-started/miniconda/install#linux-terminal-installer)
+- Singularity: [https://docs.sylabs.io/guides/3.5/user-guide/quick_start.html](https://docs.sylabs.io/guides/3.5/user-guide/quick_start.html)
+- git
+- Lmod: [https://lmod.readthedocs.io/en/latest/](https://lmod.readthedocs.io/en/latest/)
+
+:::note
+**On HPC**, you will likely have Lmod and Singularity already installed. Check with your sysadmin.
+:::
+
+## Setup instructions
+
+### Install command line (e.g. running on Linux or HPC)
+
+<Steps>
+
+1. **Load Singularity.**
+
+   For optimal performance, ensure you are using Singularity version 3.x:
+
+   ```bash
+   module load singularity/3.5.0
+   #or
+   module load singularity
+   #or
+   module load apptainer
+   ```
+
+   If this doesn't work it might already be loaded. Just run `singularity` and check.
+
+2. **Load aria2 (optional).**
+
+   To speed up container downloads, you can optionally install or load aria2c:
+
+   ```bash
+   module load aria2c
+   ```
+
+3. **Clone and set up the repository.**
+
+   Clone the repository into a directory with enough storage and ensure you are not using a symbolic link (to be sure run ``cd `pwd -P` ``). It is recommended to perform this setup within a Python virtual environment (venv) or a Conda environment:
+
+   ```bash
+   git clone https://github.com/neurodesk/neurocommand.git
+   cd neurocommand
+   pip3 install -r neurodesk/requirements.txt --user
+   bash build.sh --cli
+   bash containers.sh
+   export SINGULARITY_BINDPATH=`pwd -P`
+   # OR, depending on your installation:
+   export APPTAINER_BINDPATH=`pwd -P`
+   ```
+
+</Steps>
+
+### Install containers
+
+- If these steps are successful, the help will be displayed.
+- Install all or only specific containers by following the instructions, e.g.:
+
+<Steps>
+
+1. **Search and install specific containers.**
+
+   To search for containers that have "itksnap" in the name:
+
+   ```bash
+   bash containers.sh itksnap
+   ```
+
+2. **Install a specific version.**
+
+   To install a specific version (e.g., itksnap version 4.0.2 from 20240117):
+
+   ```bash
+   ./local/fetch_containers.sh itksnap 4.0.2 20240117
+   ```
+
+   To install all containers with that name:
+
+   ```bash
+   bash containers.sh --itksnap
+   ```
+
+   To download all containers (be careful, there are a lot of containers):
+
+   ```bash
+   bash containers.sh --all
+   ```
+
+</Steps>
+
+### Add your containers to Lmod
+
+- To add each container to the module search path, run the following:
+
+  ```bash
+  module use $PWD/local/containers/modules/
+  ```
+
+- It may be a good idea to add this to your `.bashrc` if it works. When adding to your `.bashrc` you will need to replace `$PWD` to point to the correct path, i.e. the output of:
+
+  ```bash
+  echo "module use $PWD/local/containers/modules/"
+  ```
+
+- It is very important to also set the `SINGULARITY_BINDPATH` or the `APPTAINER_BINDPATH` variable in your `.bashrc`. This variable must contain a comma-separated list of directories you want to access with the Neurodesk tools.
+
+  e.g.:
+
+  ```bash
+  export SINGULARITY_BINDPATH=/scratch/,/data/
+  # OR, depending on your installation:
+  export APPTAINER_BINDPATH=/scratch/,/data/
+  # Note: use the correct line depending on your installation. Do not add a directory that does not exist, otherwise the containers will not start!
+  ```
+
+- Run `ml avail` to see the installed containers at the top of the list (Neurodesk containers will take preference over system modules with the same name):
+
+  ```bash
+  module --ignore_cache avail
+  ```
+
+- Every time you start a new shell you need to run `module use PathToYourContainers` or add this command to your `.bashrc` file.
+
+:::note[GPU support]
+Some of our containers contain GPU-accelerated applications. Here is an example that runs the GPU accelerated program eddy in FSL:
+
+```shell
+module load fsl/6.0.5.1
+export neurodesk_singularity_opts='--nv'
+eddy_cuda9.1
+```
+:::
+
+:::note[For LXDE desktops]
+```bash
+bash build.sh --lxde --edit
+```
+:::
+
+:::note[For Mate desktops]
+Run `bash build.sh --init` (or `bash build.sh --lxde --edit`).
+
+- **lxde/mate:** Mate
+- **installdir:** Where all the neurocommand files will be stored (default: `./local`)
+- **appmenu:** The Linux menu xml file (usually `/etc/xdg/menus/****-applications.menu`)
+- **appdir:** Location for the `.desktop` files for this Linux desktop (usually `/usr/share/applications`)
+- **deskdir:** Location for the `.directory` files for this Linux desktop (typically `/usr/share/desktop-directories`)
+:::
+
+:::note[For desktop menus]
+- `sudo bash install.sh` to install (creates symlinks to menu files in installation dir).
+- `sudo bash uninstall.sh` to uninstall (removes symlinks).
+:::
+
+:::note[For user-specific desktop menus in a shared Linux environment]
+```bash
+mkdir -p $HOME/.config/menus
+mkdir -p $HOME/.local/share/applications
+mkdir -p $HOME/.local/share/desktop-directories
+ln -sfn /PATH_TO_YOUR_INSTALLATION/neurocommand/local/xfce-applications.menu $HOME/.config/menus
+ln -sfn /PATH_TO_YOUR_INSTALLATION/neurocommand/local/neurodesk-applications.menu $HOME/.config/menus
+ln -sfn /PATH_TO_YOUR_INSTALLATION/neurocommand/local/applications $HOME/.local/share/applications/neurodesk
+ln -sfn /PATH_TO_YOUR_INSTALLATION/neurocommand/local/desktop-directories $HOME/.local/share/desktop-directories/neurodesk
+```
+:::
+
+## To update
+
+### 1. Update the Neurocommand repository
+
+First, ensure your local repository is up to date by pulling the latest changes:
+
+```bash
+git pull
+```
+
+Next, rebuild Neurocommand by running:
+
+```bash
+bash build.sh
+```
+
+### 2. Update containers
+
+To update the containers, navigate to the neurodesktop directory and run:
+
+```bash
+bash containers.sh
+```
+
+### 3. Update specific modules
+
+Choose the module you want to update. For example, to update the `mrtrix3/3.0.2` module with the `eddy_cuda` fix:
+
+```bash
+~/neurocommand/local/fetch_containers.sh mrtrix3 3.0.2 20221108 mrview $@
+```
+
+## Installation examples
+
+We show a couple of specific examples on how Neurodesk can be installed on various HPC systems [here](/getting-started/installations/).

@@ -1,0 +1,24 @@
+---
+title: Docker
+description: Pull and run individual Neurodesk containers with Docker.
+sidebar:
+  order: 1
+---
+
+Our containers are automatically built in the [neurocontainers repository](https://github.com/neurodesk/neurocontainers/) and hosted on [Docker Hub](https://hub.docker.com/u/vnmd) and on [GitHub](https://github.com/neurodesk/neurocontainers/packages).
+
+## Pull Docker containers
+
+For example, for a Julia container:
+
+```bash
+docker pull vnmd/julia_1.6.1
+```
+
+You can also build Singularity images straight from Docker Hub:
+
+```bash
+singularity build julia_1.6.1.simg docker://vnmd/julia_1.6.1
+```
+
+Replace `julia_1.6.1` with your selected application. The full list of available containers is at [neurodesk.org/applications](/applications/).

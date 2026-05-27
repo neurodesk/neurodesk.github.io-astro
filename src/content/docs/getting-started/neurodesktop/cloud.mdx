@@ -1,0 +1,15 @@
+---
+title: Cloud
+description: Run Neurodesktop on cloud computing resources.
+sidebar:
+  order: 5
+---
+
+## Options for running Neurodesk on cloud computing resources
+
+There are a couple of ways Neurodesktop can be run on cloud computing resources:
+
+1. The first and easiest option is to provision a virtual Linux machine and run Docker on this machine similar to a [local Linux setup](/getting-started/neurodesktop/linux/).
+2. Another option is to use Windows VMs and some groups have had success with that. Here is a [detailed instruction on this setup](/docs/getting-started/neurodesktop/Neurodesk_Windows_Technion.pdf).
+3. This group runs JupyterHub with a Neurodesk image through [Docker Compose](https://github.com/wieluk/jupyterhub-neurodesk/).
+4. The most scalable solution is to run Neurodesk via Kubernetes. This setup is a bit more complex, but can handle many simultaneous users and is ideal for research groups and workshops. The easiest way to deploy Neurodesk on Kubernetes is to use [Zero to JupyterHub](https://z2jh.jupyter.org/en/stable/), then you can use the Neurodesk image like any other JupyterHub image. If you do not want to run a privileged container you need to deploy the [CVMFS setup on Kubernetes](https://github.com/cvmfs-contrib/cvmfs-csi/) as well.

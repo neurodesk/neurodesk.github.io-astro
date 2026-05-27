@@ -1,0 +1,54 @@
+---
+title: Singularity / Apptainer
+description: Download and run Neurodesk Singularity/Apptainer containers, including on GPUs.
+sidebar:
+  order: 2
+---
+
+Our Docker containers are converted to Singularity/Apptainer containers and stored on object storage.
+
+## Download Singularity containers
+
+First get an overview of which containers are available as Singularity containers in [neurocommand/cvmfs/log.txt](https://github.com/neurodesk/neurocommand/blob/main/cvmfs/log.txt):
+
+```shell
+curl -s https://raw.githubusercontent.com/neurodesk/neurocommand/main/cvmfs/log.txt
+```
+
+Assign the container name to a variable:
+
+```shell
+export container=itksnap_3.8.0_20201208
+```
+
+Then download the container. One way is to use curl:
+
+```shell
+curl -X GET https://neurocontainers.neurodesk.workers.dev/$container.simg -O
+```
+
+## Singularity containers and GPUs
+
+Some of our containers contain GPU-accelerated applications. Here is an example that tests the GPU-accelerated program `eddy` in FSL:
+
+```shell
+curl -X GET https://neurocontainers.neurodesk.workers.dev/fsl_6.0.5.1_20221016.simg -O
+git clone https://github.com/neurolabusc/gpu_test.git
+singularity shell --nv fsl_6.0.5.1_20221016.simg
+cd gpu_test/etest/
+bash runme_gpu.sh
+```
+
+## Transparent Singularity
+
+The Singularity containers can also be used in combination with our [Transparent Singularity Tool](/developers/architecture/transparent-singularity), which wraps the executables inside a container so they are easily available to pipelines.
+
+One example:
+
+```shell
+curl -s https://raw.githubusercontent.com/neurodesk/neurocommand/main/cvmfs/log.txt
+export container=itksnap_3.8.0_20201208
+git clone https://github.com/neurodesk/transparent-singularity ${container}
+cd ${container}
+./run_transparent_singularity.sh ${container}
+```

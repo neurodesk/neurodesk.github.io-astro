@@ -2,12 +2,47 @@
 title: Neurocontainers
 description: Individual containerised neuroimaging tools you can use in your own pipelines.
 sidebar:
-  hidden: true
+  label: Overview
+  order: 0
 ---
 
-import UnderConstruction from '../../../../components/UnderConstruction.astro';
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-<UnderConstruction
-	liveUrl="https://neurodesk.org/getting-started/neurocontainers/"
-	liveLabel="Read the Neurocontainers docs on neurodesk.org"
-/>
+Neurocontainers are individual containerised neuroimaging tools that you can pull and run directly with Docker, Singularity/Apptainer, or distribute over CVMFS. They are the building blocks behind Neurodesktop and the [Neurodesk App](/getting-started/local/neurodeskapp/), and you can also use them on their own in your own pipelines.
+
+Containers are built automatically in the [neurocontainers repository](https://github.com/neurodesk/neurocontainers/) and published to [Docker Hub](https://hub.docker.com/u/vnmd), [GitHub Container Registry](https://github.com/neurodesk/neurocontainers/packages), and as Singularity images on object storage and CVMFS.
+
+<CardGrid>
+	<LinkCard
+		title="Docker"
+		description="Pull and run individual Neurodesk containers with Docker."
+		href="/getting-started/neurocontainers/docker/"
+	/>
+	<LinkCard
+		title="Singularity / Apptainer"
+		description="Download and run Singularity/Apptainer containers, including on GPUs."
+		href="/getting-started/neurocontainers/singularity/"
+	/>
+	<LinkCard
+		title="CVMFS"
+		description="Mount Neurodesk containers from CVMFS for shared HPC and lab systems."
+		href="/getting-started/neurocontainers/cvmfs/"
+	/>
+	<LinkCard
+		title="DataLad"
+		description="Use Neurodesk containers with DataLad and ReproNim containerised workflows."
+		href="/getting-started/neurocontainers/datalad/"
+	/>
+	<LinkCard
+		title="OpenRecon"
+		description="Build Neurocontainers for Siemens OpenRecon scanners."
+		href="/getting-started/neurocontainers/openrecon/"
+	/>
+	<LinkCard
+		title="Windows 11 & WSL"
+		description="Run Neurocontainers on Windows 11 via Windows Subsystem for Linux."
+		href="/getting-started/neurocontainers/windows11-wsl/"
+	/>
+</CardGrid>
+
+Browse the full catalogue of available containers at [neurodesk.org/applications](/applications/).

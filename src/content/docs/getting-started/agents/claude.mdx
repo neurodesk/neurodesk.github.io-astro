@@ -1,0 +1,82 @@
+---
+title: Claude
+description: Use Claude Code in Neurodesk, the coding agent from Anthropic
+sidebar:
+  order: 3
+---
+
+Claude Code is Anthropic's command-line coding agent. You can run it inside a Neurodesk JupyterHub terminal and authenticate with an Anthropic subscription.
+
+**1. Start Claude in a terminal.**
+
+```bash
+claude
+```
+
+**2. Trust the folder when prompted.**
+
+<div class="fake not-content">
+	<div class="fakeMenu">
+		<div class="fakeButtons fakeClose"></div>
+		<div class="fakeButtons fakeMinimize"></div>
+		<div class="fakeButtons fakeZoom"></div>
+	</div>
+	<div class="fakeScreen fakeScreen--scroll">
+		<pre class="fake-log fake-log--cli fake-log--violet">{`Claude Code'll be able to read, edit, and execute files here.
+
+`}<span class="fake-cli-dim">{`Security guide`}</span>{`
+
+`}<span class="fake-cli-sel">{`> 1. Yes, I trust this folder`}</span>{`
+  2. No, exit`}</pre>
+	</div>
+</div>
+
+**3. Authenticate with your Anthropic subscription.**
+
+Follow the login prompt and open the URL Claude prints in a browser.
+
+:::caution
+Claude outputs a long authentication URL on the terminal. The JupyterHub terminal can wrap this URL across multiple lines, which makes it invalid when pasted. Copy the URL into an editor and remove the line breaks before pasting it into the browser.
+:::
+
+**4. Give it a task and approve permission requests as it works.**
+
+<div class="fake not-content">
+	<div class="fakeMenu">
+		<div class="fakeButtons fakeClose"></div>
+		<div class="fakeButtons fakeMinimize"></div>
+		<div class="fakeButtons fakeZoom"></div>
+	</div>
+	<div class="fakeScreen fakeScreen--scroll">
+		<pre class="fake-log fake-log--cli fake-log--violet">{`● Good, datalad is installed and there are many neuroimaging tools. Let me create a structured plan and scripts for this analysis.
+
+● Write(analysis_step1_download.sh)
+  `}<span class="fake-cli-dim">{`⎿  Wrote 67 lines to analysis_step1_download.sh
+     #!/bin/bash
+     #
+     # Script: analysis_step1_download.sh
+     # Purpose: Download ds003999 (Pre-Post rehabilitation fMRI data of post-stroke patients) from OpenNeuro
+     # Dataset: https://openneuro.org/datasets/ds003999
+     #
+
+     set -e
+
+     echo "..."
+     +57 lines (ctrl+o to expand)`}</span>{`
+
+● Bash(chmod +x /home/jovyan/claude/analysis_step1_download.sh && /home/jovyan/claude/analysis_step1_download.sh 2>&1)
+  `}<span class="fake-cli-dim">{`⎿  [INFO] siblings is 1 (DataLad siblings)
+       datalad siblings -d . add openneuro not auto-enabled, enable with
+     install(ok): /home/jovyan/claude/data/ds003999 (dataset)
+     Getting dataset content (downloading actual files)...
+     [INFO] Ensuring presence of Dataset(/home/jovyan/claude/data/ds003999)
+     +15 more lines (10s · timeout 3m)
+     ctrl+b to run in background`}</span>{`
+
+● `}<span class="fake-cli-sel">{`Downloading dataset… (1m 40s · ↓ 2.7k tokens · thinking)`}</span>{`
+  `}<span class="fake-cli-dim">{`⎿  Download ds003999 dataset using datalad
+     Explore dataset structure and contents
+     Preprocess fMRI data with fmriprep
+     Run pre vs post intervention analysis`}</span></pre>
+	</div>
+</div>
