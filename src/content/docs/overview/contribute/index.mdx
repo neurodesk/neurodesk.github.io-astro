@@ -1,13 +1,68 @@
 ---
-title: Contribution guide
-description: How to contribute code and documentation to Neurodesk.
+title: Contribute
+description: Neurodesk thrives on community contributions. Whether you're a developer, researcher, educator, or advocate for open science, there are many ways you can support us.
 sidebar:
-  hidden: true
+  order: 8
 ---
 
-import UnderConstruction from '../../../../components/UnderConstruction.astro';
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-<UnderConstruction
-	liveUrl="https://neurodesk.org/overview/contribute/"
-	liveLabel="Read the contribution guide on neurodesk.org"
-/>
+Neurodesk is a community-driven project. We welcome contributions from people with diverse skill sets and backgrounds. Pick the path that fits you best.
+
+## Get involved
+
+<CardGrid>
+	<LinkCard
+		title="Contribute code"
+		description="Build better neuroimaging infrastructure: containers, features, bug fixes."
+		href="/developers/new-tools/"
+	/>
+	<LinkCard
+		title="Improve documentation"
+		description="Good documentation makes tools accessible. Help improve our docs or developer guides."
+		href="/developers/documentation/"
+	/>
+	<LinkCard
+		title="Contribute to NeurodeskEDU"
+		description="Submit a tutorial or example notebook to the open educational platform."
+		href="/edu/"
+	/>
+	<LinkCard
+		title="Share a workflow"
+		description="Make it easier for others to use Neurodesk by sharing reproducible analysis pipelines."
+		href="https://github.com/orgs/neurodesk/discussions"
+	/>
+	<LinkCard
+		title="Donate"
+		description="Help sustain open infrastructure. Donations cover cloud services and workshops."
+		href="/overview/donate/"
+	/>
+	<LinkCard
+		title="Help solve issues"
+		description="Pick something from our GitHub backlog and submit a pull request."
+		href="https://github.com/neurodesk/neurocontainers/issues"
+	/>
+</CardGrid>
+
+### NeurodeskEDU details
+
+[NeurodeskEDU](/edu/) is our educational platform providing learning resources for neuroimaging analysis. It offers two complementary formats: **tutorials** (step-by-step guides with screenshots for GUI-based workflows) and **examples** (interactive Jupyter notebooks with executable code for scripting-focused learners). Resources span diffusion imaging, electrophysiology, functional imaging, structural imaging, and more.
+
+We welcome community contributions of both formats:
+
+- [Submit a tutorial](/edu/contribute/): write a step-by-step guide for a tool or workflow available in Neurodesk
+- [Submit an example notebook](/edu/contribute/): share a self-contained, reproducible Jupyter notebook
+- [Browse existing resources](/edu/) for inspiration
+- [Visit the NeurodeskEDU GitHub repo](https://github.com/neurodesk/neurodeskedu) to see what's there and open a pull request
+
+## Community and conduct
+
+We are committed to maintaining an inclusive, respectful, and welcoming environment for all contributors. See our [Code of Conduct](/overview/code-of-conduct/).
+
+## Meet the team
+
+Get to know the contributors powering Neurodesk on the [Contributors](/developers/contributors/) page.
+
+## Shape the future
+
+Want to help shape what's next? [See our Roadmap](/developers/architecture/roadmap/).

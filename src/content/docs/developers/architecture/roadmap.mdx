@@ -1,0 +1,55 @@
+---
+title: Project Roadmap
+description: Neurodesk's development priorities for the next year. If any of them sound exciting, get in touch and we'll help you become a contributor.
+sidebar:
+  order: 100
+---
+
+Detailed task tracking lives on the [Neurodesk Project Board](https://github.com/orgs/neurodesk/projects/9/views/4).
+This page highlights the larger themes guiding development.
+
+---
+
+## Expanding platform capabilities
+
+### AI agent integration
+
+We have started integrating agentic workflows into Neurodesk through the [Neurodesk agents guide](/getting-started/agents/). We are now seeking funding to expand this work.
+
+Our goal is to give researchers powerful AI-assisted workflows for analysing large datasets while keeping them in control and supporting fully reproducible analyses.
+
+### Container and application improvements
+
+To support Apple Silicon well, Neurodesk needs arm64 container builds that run natively. We are reengineering the build system so it can build arm64 containers alongside the existing x86_64 builds.
+
+Current work:
+
+- [Port existing containers to ARM](https://github.com/neurodesk/neurocontainers/issues/1252)
+
+### Migration to Jupyter Book v2
+
+We are migrating Neurodesk Edu to Jupyter Book v2 and improving the learning interface.
+
+Current work:
+
+- [Update to Jupyter Book v2](https://github.com/neurodesk/neurodeskedu/issues/10)
+- [Adding home button to Jupyter 2](https://github.com/neurodesk/neurodeskedu/issues/25)
+- [Dropdown launcher for play servers](https://github.com/neurodesk/neurodeskedu/issues/26)
+
+---
+
+## Improving user experience
+
+### Documentation and tutorials
+
+The [education platform](/edu/) hosts static tutorials and interactive notebooks, with an integrated review system to help maintain tutorial quality. We want to expand coverage of neuroimaging workflows and improve automated testing for tutorial content.
+
+### Teaching and workshops
+
+Neurodesk is well suited to teaching neuroimaging methods, but running a custom instance for a larger group still takes too much effort. We want to make Neurodesk easier to deploy for classes and workshops, with shared data storage, autoscaling, ARM processor support, and multi-cloud compatibility across Google Cloud, AWS, Azure, OpenStack, and OpenShift.
+
+---
+
+## Get involved
+
+Check the [project board](https://github.com/orgs/neurodesk/projects/9/views/4) for the full list of open tasks, or see our [contribution guide](/overview/contribute/) to get started.

@@ -1,0 +1,78 @@
+---
+title: Neurodesk Architecture
+description: The architecture of the Neurodesk ecosystem.
+sidebar:
+  order: 1
+---
+
+![architecture](/developers/architecture/neurodesk-components/NeurodeskPaperFigureWithOpenRecon.png)
+
+## Neurodesktop: recommended for beginners
+
+*Neurodesktop* is a compact Docker container with a browser-accessible virtual desktop that allows you to develop and implement data analysis, pre-equipped with basic fMRI and EEG analysis tools.
+
+To get started, see: [Neurodesktop](/getting-started/neurodesktop/) ([GitHub](https://github.com/neurodesk/neurodesktop))
+
+- Docker container with interface modifications
+- Contains tools necessary to manage workflows in sub-containers: vscode, git
+- CI: builds Docker image and tests if it runs; tests if CVMFS servers are OK before deployment
+- CD: pushes images to GitHub and Docker registry
+
+## Neurocommand
+
+*Neurocommand* offers the option to install and manage multiple distinct containers for more advanced users who prefer a command-line interface. *Neurocommand* is the recommended interface for users seeking to use Neurodesk in high performance computing (HPC) environments.
+
+To get started, see: [Neurocommand](/getting-started/neurocommand/) ([GitHub](https://github.com/neurodesk/neurocommand))
+
+- Script to install and manage multiple containers using transparent singularity on any Linux system
+- This repo also handles the creation of menu entries in a general form applicable to different desktop environments
+- This repo can be re-used in other projects like CVL and when installing it on bare-metal workstations
+- CI: tests if containers can be installed
+- CD: this repo checks if containers requested in apps.json file are available on object storage and if not converts the Singularity containers based on the Docker containers and uploads them to object storage
+
+## transparent-singularity
+
+*transparent-singularity* offers seamless access to applications installed in *neurodesktop* and *neurocommand*, treating containerised software as native installations.
+
+More info: [transparent-singularity](/developers/architecture/transparent-singularity/) ([GitHub](https://github.com/neurodesk/transparent-singularity))
+
+- Script to install neuro-sub-containers; installers are called by neurocommand
+- This repo provides a way of using our containers on HPCs for large scale processing of pipelines (including support of SLURM and other job schedulers)
+- CI: tests if exposing of binaries from container works
+
+## TinyRange integration
+
+To ensure accessibility for users without privileged system access (root/admin permissions), Neurodesk has integrated [TinyRange](https://github.com/tinyrange/tinyrange), a lightweight container runtime that operates without requiring root privileges. This integration represents a significant advancement in making neuroimaging tools accessible to all users, regardless of their system permissions.
+
+![TinyRange Architecture](/developers/architecture/neurodesk-components/tinyrange.png)
+
+TinyRange provides:
+
+- Rootless container execution
+- User-space networking
+- Simplified container management
+- Seamless integration with Neurodesk's interface
+- Cross-platform compatibility
+
+This solution is particularly valuable in environments where users don't have administrative privileges, such as shared computing facilities or institutional workstations.
+
+## Neurocontainers
+
+*Neurocontainers* contains scripts for building sub-containers for neuroimaging data-analysis software. These containers can be used alongside *neurocommand* or *transparent-singularity*.
+
+To get started, see: [Neurocontainers](/getting-started/neurocontainers/) ([GitHub](https://github.com/neurodesk/neurocontainers))
+
+- Build scripts for neuro-sub-containers
+- CI: building and testing of containers
+- CD: pushing containers to GitHub and Docker Hub registry
+
+## Neurodocker
+
+*Neurodocker* is a command-line program that generates custom Dockerfiles and Singularity recipes for neuroimaging and minifies existing containers.
+
+More info: [GitHub](https://github.com/neurodesk/neurodocker)
+
+- Fork of the Neurodocker project
+- Provides recipes for our containers built
+- We are providing pull requests back of recipes
+- CI: handled by [neurodocker](https://github.com/ReproNim/neurodocker), testing of generating container recipes

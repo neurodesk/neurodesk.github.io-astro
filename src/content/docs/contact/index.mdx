@@ -1,0 +1,36 @@
+---
+title: Contact
+description: Use this form to send the team a message. Please provide as many details as possible so we can assist you effectively.
+sidebar:
+  label: Contact
+  order: 55
+---
+
+Use this form to send the team a message. Please provide as many details as possible so we can assist you effectively. If your message is directed to a specific person, feel free to mention their name in the subject line.
+
+Please note that the form is powered by web3forms and all information sent in this form is subject to their [privacy policy](https://web3forms.com/privacy).
+
+<form action="https://api.web3forms.com/submit" method="POST" id="form">
+  <input type="hidden" name="access_key" value="7ebf7eec-3188-470d-a753-6ce889138dd2" />
+  <input type="hidden" name="subject" value="New Submission from Web3Forms" />
+  <input type="checkbox" name="botcheck" id="botcheck" style={{ display: 'none' }} />
+
+  <div style={{ marginBottom: '1rem' }}>
+    <label htmlFor="email" style={{ display: 'block', marginBottom: '0.25rem' }}>Email</label>
+    <input id="email" type="email" name="email" required style={{ width: '100%', padding: '0.5rem', border: '1px solid var(--sl-color-gray-5)', borderRadius: '0.25rem', background: 'var(--sl-color-bg)', color: 'var(--sl-color-text)' }} />
+  </div>
+
+  <div style={{ marginBottom: '1rem' }}>
+    <label htmlFor="name" style={{ display: 'block', marginBottom: '0.25rem' }}>Name</label>
+    <input id="name" type="text" name="name" required style={{ width: '100%', padding: '0.5rem', border: '1px solid var(--sl-color-gray-5)', borderRadius: '0.25rem', background: 'var(--sl-color-bg)', color: 'var(--sl-color-text)' }} />
+  </div>
+
+  <div style={{ marginBottom: '1rem' }}>
+    <label htmlFor="message" style={{ display: 'block', marginBottom: '0.25rem' }}>Message</label>
+    <textarea id="message" name="message" required rows={6} style={{ width: '100%', padding: '0.5rem', border: '1px solid var(--sl-color-gray-5)', borderRadius: '0.25rem', background: 'var(--sl-color-bg)', color: 'var(--sl-color-text)', fontFamily: 'inherit' }}></textarea>
+  </div>
+
+  <button type="submit" style={{ padding: '0.5rem 1rem', background: 'var(--sl-color-accent)', color: 'var(--sl-color-white)', border: 'none', borderRadius: '0.25rem', cursor: 'pointer', fontWeight: 600 }}>Submit</button>
+
+  <div id="result" style={{ marginTop: '1rem' }}></div>
+</form>

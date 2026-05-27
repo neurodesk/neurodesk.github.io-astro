@@ -1,0 +1,304 @@
+---
+title: Update a tool
+description: Step-by-step instructions on how to update an existing Neurodesk tool container.
+sidebar:
+  label: Update a tool
+  order: 3
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Updating an existing container is quite easy with the new build system.
+
+Here is a step-by-step on how to proceed by modifying the `.yaml` file. It is also possible to edit the containers by using our newly released web browser UI: [https://neurodesk.org/neurocontainers-ui/](https://neurodesk.org/neurocontainers-ui/).
+
+There's a [detailed version](#detailed-version) below including screenshots and an example.
+
+---
+
+## Condensed version
+
+1. Access the [Neurodesk Containers repository](https://github.com/neurodesk/neurocontainers).
+2. Fork the repository.
+3. Using your preferred development environment (such as VS Code locally or GitHub Codespaces), make changes to the desired container.
+
+   Each tool has its own folder inside the `recipes/` directory, and inside that folder, you will find the corresponding `build.yaml` file.
+
+   **Editing the `build.yaml`**
+
+   Open the `build.yaml` file. Make the necessary updates to:
+
+   - Software version numbers
+   - Dependencies
+   - Download links
+   - Build instructions (if needed)
+
+4. Validate your changes.
+
+   Make sure your changes are valid. In the terminal, run:
+
+   ```shell
+   ./builder/build.py generate <toolname>
+
+   #This second step can take some time
+   ./builder/build.py generate <toolname> --recreate --build --test
+   ```
+
+5. Commit and push your changes.
+6. Create a pull request.
+
+---
+
+## Detailed version
+
+## 1. Access the Neurodesk Containers
+
+Navigate to the [Neurocontainers repository](https://github.com/neurodesk/neurocontainers):
+
+![Neurocontainers repository](/developers/new_tools/update_tool/neurocontainers.png)
+
+## 2. Fork the repository
+
+You will then need to fork the Neurodesk repository to your own repositories. This allows you to make changes independently and propose updates.
+
+![Fork the neurocontainers repo](/developers/new_tools/update_tool/neurocontainers1.png)
+
+### Naming your repository
+
+You may decide to keep the same name for your new repository, or you may rename it.
+
+![Naming your forked repo](/developers/new_tools/update_tool/neurocontainers-fork.png)
+
+### Confirming you are on the forked version
+
+In the top left corner, you can see that you are in your forked repository of the neurocontainers repository.
+
+![Forked repository](/developers/new_tools/update_tool/neurocontainers-forked.png)
+
+### Keeping your forked repository up to date
+
+If changes are committed to the `Neurodesk/neurocontainers` repository, you will see a banner saying you are N commits behind. You may decide to sync the fork, which will update your repository, allowing you to have the most up-to-date files.
+
+![Commits behind](/developers/new_tools/update_tool/neurocontainers-commits-behind.png)
+
+## 3. Create and edit a Codespace
+
+Once this is done, you will want to start a Codespace by:
+
+- Clicking the **+ (Create new...)** button in the top right corner. (It's a `+` sign button.)
+- Selecting **Codespaces**, **New codespace**.
+
+![Open Codespace](/developers/new_tools/update_tool/open-codespace.png)
+
+Configure your Codespace.
+
+:::note
+**Resource recommendation:** Most Neurocontainers run smoothly on a **2-core** machine. For containers with heavier computational demands, consider using a **4-core** machine.
+:::
+
+![Configure Codespace](/developers/new_tools/update_tool/configure-codespace.png)
+
+This opens an editable environment directly in your browser.
+
+![Codespace](/developers/new_tools/update_tool/codespace.png)
+
+In the terminal, run the following lines to configure your Codespace environment.
+
+```shell
+python3 -m venv env
+source env/bin/activate
+pip install -r requirements.txt
+```
+
+This will install a series of packages to allow you to make changes to Neurocontainers.
+
+### YAML extension
+
+The first time you use a Codespace, you will also need to download the YAML extension by navigating to the Extensions tab using the icon on the left of your screen and searching for YAML. Click the install button.
+
+![Install YAML extension](/developers/new_tools/update_tool/install-yaml1.png)
+
+There will be a security pop-up where you will need to click "Trust Publisher & Install".
+
+![Trust publisher](/developers/new_tools/update_tool/install-yaml2.png)
+
+There will be another pop-up asking whether you allow the developers to collect data. You may click "Agree" or "Deny".
+
+![Data collection prompt](/developers/new_tools/update_tool/install-yaml3.png)
+
+## 4. Make changes to the desired container
+
+Navigate back to the Explorer tab using the icon on the left of your screen.
+
+Using either the terminal at the bottom of your Codespace or the file browser on the left, navigate to the `build.yaml` file of the tool you wish to update.
+
+:::note
+In this example, we are updating the [**Connectome Workbench**](https://neuro.debian.net/pkgs/connectome-workbench.html) tool.
+:::
+
+Each tool has its own folder inside the `recipes/` directory, and inside that folder, you will find the corresponding `build.yaml` file.
+
+- Using the GUI (file browser): navigate manually to `recipes/connectomeworkbench/`.
+- Using the terminal, you can use:
+
+  ```shell
+  cd recipes/connectomeworkbench/ # or whichever other neurocontainer you want to update
+  ```
+
+![Codespace recipe folder](/developers/new_tools/update_tool/codespace-recipe.png)
+
+### Editing the `build.yaml`
+
+Open the `build.yaml` file. Make the necessary updates to:
+
+- Software version numbers
+- Dependencies
+- Download links
+- Build instructions (if needed)
+
+In this example, when we go to the [Connectome Workbench website](https://www.humanconnectome.org/software/get-connectome-workbench#download), we can see that the latest version available is Connectome Workbench v2.0.1.
+
+![Connectome Workbench 2.0.1](/developers/new_tools/update_tool/connectome-workbench201.png)
+
+To update the Neurocontainer version, simply change the `version:` to `2.0.1`.
+
+![build.yaml change](/developers/new_tools/update_tool/buildyaml-change.png)
+
+If you are unsure how to structure the `build.yaml`, please refer to the examples provided in the [Neurocontainers builder documentation](https://github.com/neurodesk/neurocontainers/tree/main/builder).
+
+:::caution[Important]
+Keep your formatting strict. YAML files are indentation-sensitive. Use spaces, not tabs.
+:::
+
+Once you have made your changes, save the file.
+
+## 5. Validate your changes
+
+Before committing, make sure your changes are valid.
+
+In the terminal, run:
+
+```shell
+./builder/build.py generate connectomeworkbench # Replace connectomeworkbench with the name of the folder you updated
+
+#This second step can take some time
+./builder/build.py generate connectomeworkbench --recreate --build --test # Replace connectomeworkbench with the name of the folder you updated
+```
+
+This script will:
+
+- Parse your `build.yaml`
+- Check for syntax errors
+- Show the build steps without actually building the full container
+
+You will be able to see the progress for each of the building steps in the VS Code terminal panel at the bottom of your Codespace. The output looks something like this:
+
+<div class="fake not-content">
+	<div class="fakeMenu">
+		<div class="fakeButtons fakeClose"></div>
+		<div class="fakeButtons fakeMinimize"></div>
+		<div class="fakeButtons fakeZoom"></div>
+	</div>
+	<div class="fakeScreen fakeScreen--scroll">
+		<pre class="fake-log fake-log--cli">{`DataLayer: Build directory already exists.
+(env) @neurodesksExternalUser:/workspaces/neurocontainers (main) $ ./builder/build.py generate connectomeworkbench --recreate --build --test
+
+`}<span class="fake-cli-sel">{`Building Docker 302.2s (15/26)`}</span>{`
+ => [build  7/22] RUN apt-get update -qq && apt-get install -y -q --no-install-recommends ca-certificates curl gnupg2 jq        4.1s
+ => [build  8/22] RUN apt-get install -y --no-install-recommends bc connectome-workbench                                       182.3s
+ => [build  9/22] WORKDIR /                                                                                                      0.0s
+ => [build 10/22] RUN echo "Configuring container"                                                                               0.1s
+ => [build 11/22] COPY license.txt /opt/connectome-workbench/license.txt                                                         0.0s
+ => exporting to image                                                                                                          14.2s
+ => => exporting layers                                                                                                         14.2s`}</pre>
+	</div>
+</div>
+
+If there are errors, correct them before proceeding.
+
+Once you see `Docker image built successfully at connectomeworkbench:2.0.1`, you are ready to commit and push your changes.
+
+## 6. Commit and push your changes
+
+Once you have validated your `build.yaml`, it's time to save and upload your work.
+
+In the terminal:
+
+```shell
+git status
+```
+
+to check which files were changed.
+
+<div class="fake not-content">
+	<div class="fakeMenu">
+		<div class="fakeButtons fakeClose"></div>
+		<div class="fakeButtons fakeMinimize"></div>
+		<div class="fakeButtons fakeZoom"></div>
+	</div>
+	<div class="fakeScreen fakeScreen--scroll">
+		<pre class="fake-log fake-log--cli">{`Docker image built successfully at connectomeworkbench:2.0.1
+Running tests...
+No tests found.
+
+(env) @neurodesksExternalUser:/workspaces/neurocontainers (main) $ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        `}<span class="fake-cli-sel">{`modified:   recipes/connectomeworkbench/build.yaml`}</span>{`
+
+no changes added to commit (use "git add" and/or "git commit -a")`}</pre>
+	</div>
+</div>
+
+If only this reflects the changes you've made, then stage, commit, and push your changes:
+
+```shell
+git add recipes/connectomeworkbench/build.yaml # Replace connectomeworkbench with the name of the folder you updated
+git commit -m "Update connectomeworkbench container: updated version 2.0.1" # Adapt commit message
+git push
+```
+
+Make sure your commit message is clear and descriptive, for example:
+
+`Update Connectome Workbench container to version 1.5.0`. Adjust the commit message based on the updates you made to the Neurocontainer.
+
+## 7. Create a pull request
+
+After pushing your changes:
+
+1. Go back to your forked repository on GitHub.
+2. You should see a banner saying "This branch is X commits ahead of `neurodesk/neurocontainers:main`".
+
+   You can either click on **X commit ahead of** to view the differences between your repository and the Neurodesk repository and then **Create pull request**.
+
+   ![Commits ahead](/developers/new_tools/update_tool/commits-ahead.png)
+
+   Or click on **Contribute**, **Open pull request**.
+
+   ![Create pull request](/developers/new_tools/update_tool/create-pull.png)
+
+3. In the pull request:
+
+   - Provide a clear title (e.g. "Update Connectome Workbench to v1.5.0").
+   - Write a brief description of what you changed (version bump, new dependencies, etc.).
+   - Create the pull request.
+
+   ![Pull request](/developers/new_tools/update_tool/pull-request.png)
+
+Our Neurodesk team will review your proposed update, test the updated container to make sure it works, and merge your changes to Neurodesk if everything works correctly, allowing all users to benefit.
+
+---
+
+More detailed documentation can be found here: [https://github.com/neurodesk/neurocontainers/tree/main/builder](https://github.com/neurodesk/neurocontainers/tree/main/builder).
+
+## Need help?
+
+If you have questions or would like feedback before submitting:
+
+- Open a [discussion](https://github.com/neurodesk/neurodesk.github.io/discussions)
+
+We appreciate your contribution to the Neurodesk community and reproducible science.
