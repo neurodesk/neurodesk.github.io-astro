@@ -22,6 +22,119 @@
 	height: auto;
 }
 
+/* FAQ collapsibles: native <details>/<summary> with Starlight-themed chrome. */
+.faq-item {
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.5rem;
+	margin: 0.5rem 0;
+	background: var(--sl-color-bg-sidebar);
+	overflow: hidden;
+	transition: border-color 0.15s ease;
+}
+
+.faq-item[open] {
+	border-color: var(--sl-color-accent);
+}
+
+.faq-item > summary {
+	cursor: pointer;
+	padding: 0.85rem 1rem;
+	font-weight: 600;
+	color: var(--sl-color-text);
+	list-style: none;
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	transition: background 0.15s ease;
+}
+
+.faq-item > summary:hover {
+	background: var(--sl-color-gray-6);
+}
+
+.faq-item > summary::-webkit-details-marker { display: none; }
+.faq-item > summary::marker { content: ''; }
+
+.faq-item > summary::before {
+	content: '';
+	width: 0.5rem;
+	height: 0.5rem;
+	border-right: 2px solid var(--sl-color-text-accent);
+	border-bottom: 2px solid var(--sl-color-text-accent);
+	transform: rotate(-45deg);
+	transition: transform 0.15s ease;
+	flex-shrink: 0;
+}
+
+.faq-item[open] > summary::before {
+	transform: rotate(45deg);
+}
+
+.faq-item > *:not(summary) {
+	padding-inline: 1rem;
+}
+
+.faq-item > *:not(summary):first-of-type {
+	margin-top: 0;
+}
+
+.faq-item > *:last-child {
+	padding-bottom: 1rem;
+}
+
+/* Partners grid: consistent logo tiles for funder/cloud/infrastructure callouts. */
+.partners-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+	gap: 1rem;
+	margin: 1.5rem 0 2.5rem;
+}
+
+.partners-grid__item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 0.75rem;
+	padding: 1.25rem 1rem;
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.5rem;
+	/* Force a white background regardless of theme: most partner logos
+	   are PNGs designed for light surfaces and look awful on dark. */
+	background: #fff;
+	text-decoration: none;
+	color: #0c0e0a;
+	transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.partners-grid__item:hover {
+	border-color: var(--sl-color-accent);
+	transform: translateY(-1px);
+}
+
+.partners-grid__logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 3.5rem;
+	width: 100%;
+}
+
+.partners-grid__logo img {
+	max-height: 3.5rem;
+	max-width: 100%;
+	width: auto;
+	margin: 0 !important;
+	object-fit: contain;
+}
+
+/* On light theme, some PNG logos are exported with white-on-transparent or dark-on-transparent.
+   This rule lets a logo opt into being inverted on dark backgrounds via the .partners-grid__logo--invert class. */
+:root[data-theme='dark'] .partners-grid__logo--invert img {
+	filter: invert(1) hue-rotate(180deg);
+}
+
+
 :root[data-theme='light'] {
 	--sl-color-accent-low: #e6f1d6;
 	--sl-color-accent: #4f7b38;
@@ -538,6 +651,17 @@
 	padding: 0 0.15rem;
 	border-radius: 0.2rem;
 }
+
+/* CLI-style log: white text on dark, with accent classes for selected
+   items and dimmed help text. The accent colour is themed per CLI tool
+   via a CSS variable so each fake terminal matches its real-world look. */
+.fake-log--cli {
+	color: #e8ecef;
+	--cli-sel: #5eead4; /* teal default (Codex, generic) */
+}
+.fake-log--cli.fake-log--violet { --cli-sel: #a78bfa; } /* Claude */
+.fake-log--cli .fake-cli-sel { color: var(--cli-sel); }
+.fake-log--cli .fake-cli-dim { color: #8b949e; }
 
 .typewriter {
 	color: transparent;
