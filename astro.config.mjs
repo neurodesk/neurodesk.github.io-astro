@@ -143,7 +143,20 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: 'Overview',
-					items: [{ autogenerate: { directory: 'overview' } }],
+					items: [
+						{ label: 'Overview', link: '/overview/' },
+						{ label: 'Acknowledgement', link: '/overview/acknowledgement/' },
+						{ label: 'Applications', link: '/overview/applications/' },
+						{ label: 'Code of conduct', link: '/overview/code-of-conduct/' },
+						{ label: 'Discussion forum', link: '/overview/discussion-forum/' },
+						{ label: 'Donate', link: '/overview/donate/' },
+						{ label: 'How to cite us', link: '/overview/how-to-cite-us/' },
+						{ label: 'Metrics', link: '/overview/metrics/' },
+						{ label: 'Publications', link: '/overview/publications/' },
+						{ label: 'FAQ', link: '/overview/faq/' },
+						{ label: 'Release history', link: '/overview/release-history/' },
+						{ label: 'Contribute', link: '/overview/contribute/' },
+					],
 				},
 				{
 					label: 'Getting started',
@@ -181,7 +194,52 @@ export default defineConfig({
 				},
 				{
 					label: 'Developers',
-					items: [{ autogenerate: { directory: 'developers' } }],
+					items: [
+						{ label: 'Overview', link: '/developers/' },
+						{
+							label: 'Architecture',
+							items: [
+								{ label: 'Overview', link: '/developers/architecture/' },
+								{ label: 'Neurodesk components', link: '/developers/architecture/neurodesk-components/' },
+								{ label: 'Neurodesk dev', link: '/developers/architecture/neurodesk-dev/' },
+								{ label: 'Release process', link: '/developers/architecture/release-process/' },
+								{ label: 'Roadmap', link: '/developers/architecture/roadmap/' },
+								{ label: 'Transparent Singularity', link: '/developers/architecture/transparent-singularity/' },
+								{
+									label: 'CVMFS',
+									items: [{ autogenerate: { directory: 'developers/architecture/cvmfs' } }],
+								},
+							],
+						},
+						{
+							label: 'Contributors',
+							items: [{ autogenerate: { directory: 'developers/contributors' } }],
+						},
+						{
+							label: 'Designer',
+							items: [{ autogenerate: { directory: 'developers/designer' } }],
+						},
+						{
+							label: 'Documentation',
+							items: [{ autogenerate: { directory: 'developers/documentation' } }],
+						},
+						{
+							label: 'Interfacing',
+							items: [{ autogenerate: { directory: 'developers/interfacing' } }],
+						},
+						{
+							label: 'Neurocontainer copilot',
+							items: [{ autogenerate: { directory: 'developers/neurocontainer-copilot' } }],
+						},
+						{
+							label: 'Neurodesk copilot',
+							items: [{ autogenerate: { directory: 'developers/neurodesk-copilot' } }],
+						},
+						{
+							label: 'New tools',
+							items: [{ autogenerate: { directory: 'developers/new-tools' } }],
+						},
+					],
 				},
 				{
 					label: 'Contact',
