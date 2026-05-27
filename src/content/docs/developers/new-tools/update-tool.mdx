@@ -6,7 +6,7 @@ sidebar:
   order: 3
 ---
 
-import { Steps } from '@astrojs/starlight/components';
+import { FileTree, Steps } from '@astrojs/starlight/components';
 
 Updating an existing container is quite easy with the new build system.
 
@@ -136,10 +136,27 @@ Using either the terminal at the bottom of your Codespace or the file browser on
 In this example, we are updating the [**Connectome Workbench**](https://neuro.debian.net/pkgs/connectome-workbench.html) tool.
 :::
 
-Each tool has its own folder inside the `recipes/` directory, and inside that folder, you will find the corresponding `build.yaml` file.
+Each tool has its own folder inside the `recipes/` directory. Inside that folder you'll find the `build.yaml` recipe plus any supporting files (license, README, test config):
+
+<FileTree>
+
+- recipes/
+  - connectomeworkbench/
+    - **build.yaml** the recipe file to edit
+    - license.txt
+    - README.md
+    - fulltest.yaml
+  - ants/
+  - fsl/
+  - …
+- builder/
+  - build.py
+- README.md
+
+</FileTree>
 
 - Using the GUI (file browser): navigate manually to `recipes/connectomeworkbench/`.
-- Using the terminal, you can use:
+- Using the terminal:
 
   ```shell
   cd recipes/connectomeworkbench/ # or whichever other neurocontainer you want to update
