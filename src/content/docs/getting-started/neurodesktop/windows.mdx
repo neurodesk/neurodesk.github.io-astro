@@ -5,7 +5,7 @@ sidebar:
   order: 2
 ---
 
-import { Code, Steps } from '@astrojs/starlight/components';
+import { Code, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
 import { jupyterNeurodeskVersion } from '../../../../config/neurodesktop';
 
 export const dockerRunCommand = `docker run --shm-size=1gb -it --privileged --user=root --name neurodesktop -v C:/neurodesktop-storage:/neurodesktop-storage --mount source=neurodesk-home,target=/home/jovyan --add-host=host.docker.internal:host-gateway -e OLLAMA_HOST="http://host.docker.internal:11434" -p 8888:8888 -e NEURODESKTOP_VERSION=${jupyterNeurodeskVersion} vnmd/neurodesktop:${jupyterNeurodeskVersion}`;
@@ -18,7 +18,7 @@ export const dockerRunCommand = `docker run --shm-size=1gb -it --privileged --us
 
 ## Quickstart
 
-### 1. Install Docker or Podman
+### Install Docker or Podman
 
 Install Docker from the [Docker install docs](https://docs.docker.com/get-docker/).
 
@@ -28,15 +28,17 @@ The Docker installation will reboot your computer a few times. There might be wa
 
 Alternatively, Neurodesk also works with Podman: follow the [Podman installation instructions](https://podman.io/docs/installation).
 
-### 2. Run Neurodesktop
+### Run Neurodesktop
 
 Use one of the following options to run Neurodesktop:
 
-#### Option 1 (recommended): Neurodesk App
+<Tabs syncKey="install-method">
+<TabItem label="Neurodesk App (recommended)">
 
 See the [Neurodesk App instructions](/getting-started/local/neurodeskapp/) for installing and using the app.
 
-#### Option 2 (advanced): using terminal
+</TabItem>
+<TabItem label="Terminal">
 
 <Steps>
 
@@ -68,6 +70,9 @@ See the [Neurodesk App instructions](/getting-started/local/neurodeskapp/) for i
 7. For an optimal experience, switch your browser to full-screen mode by following the [instructions for your browser](https://www.thewindowsclub.com/open-chrome-edge-or-firefox-browser-in-full-screen-mode).
 
 </Steps>
+
+</TabItem>
+</Tabs>
 
 :::note
 The browser can be closed anytime, and Neurodesktop will continue running in the background. To reconnect to Neurodesktop, simply start over from step 3 above.

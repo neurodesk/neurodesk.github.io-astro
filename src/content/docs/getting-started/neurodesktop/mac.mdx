@@ -6,7 +6,7 @@ sidebar:
   order: 2
 ---
 
-import { Code, Steps } from '@astrojs/starlight/components';
+import { Code, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
 import { jupyterNeurodeskVersion } from '../../../../config/neurodesktop';
 
 export const dockerRunCommand = `docker volume create neurodesk-home &&
@@ -21,7 +21,7 @@ docker run \\
 
 ## Quickstart
 
-### 1. Install Docker or Podman
+### Install Docker or Podman
 
 Install Docker from the [Docker install docs](https://docs.docker.com/get-docker/). Alternatively, Neurodesk also works with Podman: follow the [Podman installation instructions](https://podman.io/docs/installation).
 
@@ -33,15 +33,17 @@ Docker for macOS by default runs with 2GB memory. For actual workloads, 4GB memo
 3. Increase the Swap slider from 1GB to 2GB (or greater).
 :::
 
-### 2. Run Neurodesktop
+### Run Neurodesktop
 
 Use one of the following options to run Neurodesktop:
 
-#### Option 1 (recommended): Neurodesk App
+<Tabs syncKey="install-method">
+<TabItem label="Neurodesk App (recommended)">
 
 See the [Neurodesk App instructions](/getting-started/local/neurodeskapp/) for installing and using the app.
 
-#### Option 2 (advanced): using terminal
+</TabItem>
+<TabItem label="Terminal">
 
 Create a local folder where the downloaded applications will be stored, e.g. `~/neurodesktop-storage`.
 
@@ -70,6 +72,9 @@ Create a local folder where the downloaded applications will be stored, e.g. `~/
 6. Neurodesk is ready to use. See the tutorials page for advice on how to use Neurodesk.
 
 </Steps>
+
+</TabItem>
+</Tabs>
 
 :::note
 The browser can be closed anytime, and Neurodesktop will continue to run in the background. To reconnect to Neurodesktop, simply start over from step 3 above.
