@@ -5,11 +5,15 @@ sidebar:
   order: 1
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 ## 1. Prerequisites
 
 - [Algolia account](https://www.algolia.com/)
 
 ## 2. Create a crawler to index the documentation
+
+<Steps>
 
 1. In the Algolia overview page, click on "Go To Crawlers".
 2. Click on "Add new crawler".
@@ -17,7 +21,11 @@ sidebar:
 4. Set the "Start URL" to your documentation URL (e.g. `https://neurodesk.org/`).
 5. Click "Create".
 
+</Steps>
+
 ## 3. Configure the crawler
+
+<Steps>
 
 1. In the crawler settings, go to the "Editor" section under "SETUP".
 2. You can specify how the content should be indexed. It can override the default settings.
@@ -29,7 +37,11 @@ sidebar:
 3. Run the crawler by clicking on "Run Test" in the top right corner.
 4. Once the test is successful, click on "Review and Publish" to start indexing the documentation.
 
+</Steps>
+
 ## 4. Create a new Algolia index
+
+<Steps>
 
 1. Log in to your Algolia account.
 2. Click on "Indices" in the left sidebar.
@@ -37,9 +49,15 @@ sidebar:
 4. Name your index (e.g. `neurodesk-docs`).
 5. Click "Create".
 
+</Steps>
+
 ## 5. Configure the Algolia index
+
+<Steps>
 
 1. In the index settings, go to the "Searchable attributes" section.
 2. Add attributes you want to be searchable, e.g. `title`, `content`.
 3. In the "Ranking" section, set the ranking criteria according to your needs.
 4. Save the settings.
+
+</Steps>

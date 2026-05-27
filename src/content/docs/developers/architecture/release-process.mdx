@@ -5,7 +5,11 @@ sidebar:
   order: 1
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 ## Neurodesktop
+
+<Steps>
 
 1. Check if the last automated build ran OK: [https://github.com/neurodesk/neurodesktop/actions](https://github.com/neurodesk/neurodesktop/actions)
 2. Run this build date and test if everything is OK and no regression happened.
@@ -15,11 +19,15 @@ sidebar:
 6. Commit all changes.
 7. Tweet a quick summary of the changes and announce the new version: [https://masto.ai/@Neurodesk](https://masto.ai/@Neurodesk)
 
+</Steps>
+
 ## Neurodesk App
 
 ### Release process
 
 Follow these steps to create a new release of the [Neurodesk App](https://github.com/neurodesk/neurodesk-app).
+
+<Steps>
 
 1. If there's a new version of the Neurodesktop image, a GitHub Action will open a PR with the updated `jupyter_neurodesk_version` in the `neurodesktop.toml` file. Double-check and merge this PR.
 
@@ -33,9 +41,13 @@ Follow these steps to create a new release of the [Neurodesk App](https://github
 
 6. Once all the changes are complete, and installers are uploaded to the release, then publish the release.
 
+</Steps>
+
 ### Update macOS certificate
 
 Follow these step-by-step instructions to generate and export the required macOS certificate for the Neurodesk App release.
+
+<Steps>
 
 1. Launch the "Keychain Access" application on your Mac, go to "Certificate Assistant."
 2. Request a Certificate from a Certificate Authority: within "Certificate Assistant," select "Request a Certificate from a Certificate Authority."
@@ -48,6 +60,8 @@ Follow these step-by-step instructions to generate and export the required macOS
    ```bash
    openssl base64 -in neurodesk_certificate.p12
    ```
+
+</Steps>
 
 ### Update the GitHub secrets for the Publish workflow
 

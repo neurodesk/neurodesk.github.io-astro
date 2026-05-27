@@ -6,6 +6,8 @@ sidebar:
   order: 2
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 This applies if you wish to submit a new tutorial or amend content on a page. Our website is mostly written in Markdown (`.md` files). We include the basics of writing in Markdown on this page.
 
 ## Table of contents
@@ -24,8 +26,12 @@ This applies if you wish to submit a new tutorial or amend content on a page. Ou
 
 Begin by creating a copy of our documentation that you can edit:
 
+<Steps>
+
 1. Visit the GitHub repository for the [Neurodesk documentation](https://github.com/neurodesk/neurodesk.github.io).
 2. [**Fork**](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repository.
+
+</Steps>
 
 ![Repo fork](/learning-resources/tutorials/tutorial-template/1_fork.png)
 
@@ -103,6 +109,8 @@ The URL for the repository can be copied by clicking on the button highlighted b
 
 ### Contribute your new content to the official documentation
 
+<Steps>
+
 1. Once you are happy with your content, to avoid merge conflicts, rebase your branch with the *main* branch, which should be synced with *neurodesk/neurodesk.github.io:main* (on GitHub check if your repo is synced and locally checkout the *main* branch and run `git pull`).
 
    ```bash
@@ -130,6 +138,8 @@ The URL for the repository can be copied by clicking on the button highlighted b
 7. Give your pull request a title (e.g. "Document PhysIO tutorial"), leave a comment briefly describing what you have done, and then create the pull request.
 
 8. Someone from the Neurodesk team will review and accept your changes, which will appear on our website soon.
+
+</Steps>
 
 Thanks so much for taking the time to contribute content to the Neurodesk community. If you have any feedback on the process, please let us know on [GitHub discussions](https://github.com/orgs/neurodesk/discussions).
 
