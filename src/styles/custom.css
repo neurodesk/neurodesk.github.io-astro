@@ -12,6 +12,67 @@
 	--sl-color-accent-low: #1e2a16;
 	--sl-color-accent: #6aa329;
 	--sl-color-accent-high: #d3e7b6;
+	--sl-nav-height: 2.75rem;
+	--sl-nav-pad-y: 0.25rem;
+}
+
+/* Starlight bumps --sl-nav-height to 4rem at >=50em; keep it small. */
+@media (min-width: 50em) {
+	:root {
+		--sl-nav-height: 2.75rem;
+	}
+}
+
+/* Pagefind search trigger: Starlight's default styles it like a wide fake
+   text input that suggests typing, but it actually opens a modal. Restyle
+   as a compact button — magnifier + "Search" + ⌘K hint — so the affordance
+   matches the behaviour. */
+site-search button[data-open-modal] {
+	gap: 0.375rem;
+	font-size: var(--sl-text-xs);
+}
+@media (min-width: 50rem) {
+	site-search button[data-open-modal] {
+		width: auto;
+		max-width: none;
+		padding-inline: 0.5rem;
+		background-color: transparent;
+		border-color: transparent;
+		border-radius: 0.375rem;
+	}
+	site-search button[data-open-modal]:hover {
+		background-color: var(--sl-color-gray-6);
+		border-color: transparent;
+		color: var(--sl-color-white);
+	}
+	/* Pull the ⌘K chip in next to the label instead of pushing it to the far edge. */
+	site-search button[data-open-modal] > :last-child {
+		margin-inline-start: 0;
+	}
+	site-search button[data-open-modal] kbd {
+		padding: 0 0.25rem;
+		font-size: var(--sl-text-xs);
+		background-color: var(--sl-color-gray-5);
+	}
+
+	/* Right-align search beside the social icons, with a divider between. */
+	.header {
+		grid-template-columns: auto 1fr auto auto !important;
+	}
+	.header > div:has(site-search) {
+		grid-column: 3;
+		justify-self: end;
+	}
+	.header > .right-group {
+		grid-column: 4;
+		margin-inline-start: -0.75rem;
+	}
+	.header > .right-group::before {
+		content: '';
+		align-self: center;
+		height: 1.25rem;
+		border-inline-start: 1px solid var(--sl-color-gray-5);
+	}
 }
 
 /* Content images: centred with breathing room. Applies to plain <img>, markdown ![]() and HTML <img>. */
