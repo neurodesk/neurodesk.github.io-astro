@@ -177,9 +177,15 @@ In this example, when we go to the [Connectome Workbench website](https://www.hu
 
 ![Connectome Workbench 2.0.1](/developers/new_tools/update_tool/connectome-workbench201.png)
 
-To update the Neurocontainer version, simply change the `version:` to `2.0.1`.
+To update the Neurocontainer version, change the `version:` to `2.0.1`:
 
-![build.yaml change](/developers/new_tools/update_tool/buildyaml-change.png)
+```yaml del={2} ins={3}
+name: connectomeworkbench
+version: 2.0.0
+version: 2.0.1
+architectures:
+  - x86_64
+```
 
 If you are unsure how to structure the `build.yaml`, please refer to the examples provided in the [Neurocontainers builder documentation](https://github.com/neurodesk/neurocontainers/tree/main/builder).
 
