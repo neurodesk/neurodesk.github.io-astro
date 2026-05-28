@@ -143,6 +143,7 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: 'Overview',
+					collapsed: true,
 					items: [
 						{ label: 'Overview', link: '/overview/' },
 						{ label: 'Acknowledgement', link: '/overview/acknowledgement/' },
@@ -160,44 +161,54 @@ export default defineConfig({
 				},
 				{
 					label: 'Getting started',
+					collapsed: true,
 					items: [
 						{ label: 'Overview', link: '/getting-started/' },
 						{
 							label: 'Local',
+							collapsed: true,
 							items: [{ autogenerate: { directory: 'getting-started/local' } }],
 						},
 						{
 							label: 'Hosted',
+							collapsed: true,
 							items: [{ autogenerate: { directory: 'getting-started/hosted' } }],
 						},
 						{
 							label: 'Neurodesktop',
+							collapsed: true,
 							items: [{ autogenerate: { directory: 'getting-started/neurodesktop' } }],
 						},
 						{
 							label: 'Neurocommand',
+							collapsed: true,
 							items: [{ autogenerate: { directory: 'getting-started/neurocommand' } }],
 						},
 						{
 							label: 'Neurocontainers',
+							collapsed: true,
 							items: [{ autogenerate: { directory: 'getting-started/neurocontainers' } }],
 						},
 						{
 							label: 'Installations',
+							collapsed: true,
 							items: [{ autogenerate: { directory: 'getting-started/installations' } }],
 						},
 						{
 							label: 'Agents',
+							collapsed: true,
 							items: [{ autogenerate: { directory: 'getting-started/agents' } }],
 						},
 					],
 				},
 				{
 					label: 'Developers',
+					collapsed: true,
 					items: [
 						{ label: 'Overview', link: '/developers/' },
 						{
 							label: 'Architecture',
+							collapsed: true,
 							items: [
 								{ label: 'Overview', link: '/developers/architecture/' },
 								{ label: 'Neurodesk components', link: '/developers/architecture/neurodesk-components/' },
@@ -207,36 +218,44 @@ export default defineConfig({
 								{ label: 'Transparent Singularity', link: '/developers/architecture/transparent-singularity/' },
 								{
 									label: 'CVMFS',
+									collapsed: true,
 									items: [{ autogenerate: { directory: 'developers/architecture/cvmfs' } }],
 								},
 							],
 						},
 						{
 							label: 'Contributors',
+							collapsed: true,
 							items: [{ autogenerate: { directory: 'developers/contributors' } }],
 						},
 						{
 							label: 'Designer',
+							collapsed: true,
 							items: [{ autogenerate: { directory: 'developers/designer' } }],
 						},
 						{
 							label: 'Documentation',
+							collapsed: true,
 							items: [{ autogenerate: { directory: 'developers/documentation' } }],
 						},
 						{
 							label: 'Interfacing',
+							collapsed: true,
 							items: [{ autogenerate: { directory: 'developers/interfacing' } }],
 						},
 						{
 							label: 'Neurocontainer copilot',
+							collapsed: true,
 							items: [{ autogenerate: { directory: 'developers/neurocontainer-copilot' } }],
 						},
 						{
 							label: 'Neurodesk copilot',
+							collapsed: true,
 							items: [{ autogenerate: { directory: 'developers/neurodesk-copilot' } }],
 						},
 						{
 							label: 'New tools',
+							collapsed: true,
 							items: [{ autogenerate: { directory: 'developers/new-tools' } }],
 						},
 					],
