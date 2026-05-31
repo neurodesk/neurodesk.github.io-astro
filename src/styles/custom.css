@@ -12,15 +12,6 @@
 	--sl-color-accent-low: #1e2a16;
 	--sl-color-accent: #6aa329;
 	--sl-color-accent-high: #d3e7b6;
-	--sl-nav-height: 2.75rem;
-	--sl-nav-pad-y: 0.25rem;
-}
-
-/* Starlight bumps --sl-nav-height to 4rem at >=50em; keep it small. */
-@media (min-width: 50em) {
-	:root {
-		--sl-nav-height: 2.75rem;
-	}
 }
 
 /* Pagefind search trigger: Starlight's default styles it like a wide fake
